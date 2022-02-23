@@ -20,9 +20,9 @@
                         <td>{{license.char.firstname}}</td>
                         <td>{{license.char.lastname}}</td>
                         <td>
-                                <div v-if="license.type">
-                                    Weapon permission
-                                </div>
+                            <div v-if="license.type">
+                                Weapon permission
+                            </div>
                         </td>
                         <td>
                             <button type="button" class="btn btn-danger btn-sm">Revoke</button>
@@ -53,7 +53,7 @@ export default {
 
     methods: {
         loadData: async function (){
-            await axios.get('/../api/others/licenses/list').then(data => {
+            await axios.get('/../api/others/licenses/history').then(data => {
                 this.licenses = data.data
             }).catch(error => {
                 console.log(error)

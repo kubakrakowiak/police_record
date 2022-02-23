@@ -25,6 +25,22 @@ class LicenseController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function history()
+    {
+        $results = UserLicense::all();
+        foreach ($results as $p) {
+            $p->char = Character::where('identifier', $p->owner)
+                ->where('digit', $p->digit)
+                ->first();
+        }
+        return response()->json($results);
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request

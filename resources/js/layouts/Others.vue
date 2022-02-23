@@ -38,8 +38,8 @@ export default {
                             title: 'List'
                         },
                         {
-                            href: '/others/licenses/revoke',
-                            title: 'Revoke'
+                            href: '/others/licenses/history',
+                            title: 'Logs'
                         }
                     ]
                 },

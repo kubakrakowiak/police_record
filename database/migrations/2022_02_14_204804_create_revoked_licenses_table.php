@@ -15,9 +15,7 @@ class CreateRevokedLicensesTable extends Migration
     {
         Schema::create('user_licenses_logs', function (Blueprint $table) {
             $table->id();
-            $table->integer('license_id');
-            $table->foreign('license_id')->references('id')->on('user_licenses');
-            $table->integer('user_id');
+            //todo fill it with same field like user licenses
             $table->timestamps();
         });
     }
