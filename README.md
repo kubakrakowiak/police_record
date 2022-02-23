@@ -1,3 +1,61 @@
+Required tables from other system
+CREATE TABLE IF NOT EXISTS `owned_vehicles` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `owner` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `digit` int DEFAULT '1',
+  `co_owner` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `co_digit` int DEFAULT '1',
+  `co_owner2` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `co_digit2` int DEFAULT '1',
+  `co_owner3` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `co_digit3` int DEFAULT '1',
+  `vehicle` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  `state` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT 'stored',
+  `plate` varchar(12) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT 'car',
+  `job` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `destroyed` int DEFAULT NULL,
+  `firstmodel` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `vehicleid` int DEFAULT NULL,
+)
+
+CREATE TABLE IF NOT EXISTS `characters` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `identifier` varchar(255) NOT NULL,
+  `digit` int DEFAULT '1',
+  `accounts` varchar(255) DEFAULT NULL,
+  `skin` longtext,
+  `job` varchar(50) DEFAULT 'unemployed',
+  `job_grade` int DEFAULT '0',
+  `job_level` varchar(255) NOT NULL DEFAULT '{"level":0,"points":0}',
+  `hiddenjob` varchar(50) DEFAULT 'unemployed',
+  `hiddenjob_grade` int DEFAULT '0',
+  `job_id` varchar(255) DEFAULT '{"name":"nojob","id":0}',
+  `inventory` longtext,
+  `loadout` longtext,
+  `position` varchar(255) DEFAULT '{"z":0.0,"y":0.0,"x":0.0}',
+  `slot` varchar(255) DEFAULT NULL,
+  `firstname` varchar(255) DEFAULT NULL,
+  `lastname` varchar(255) DEFAULT NULL,
+  `dateofbirth` varchar(255) DEFAULT NULL,
+  `sex` varchar(1) DEFAULT 'M',
+  `height` varchar(128) DEFAULT NULL,
+  `status` longtext,
+  `isDead` tinyint(1) DEFAULT '0',
+  `phone_number` varchar(10) DEFAULT NULL,
+  `account_number` varchar(10) DEFAULT NULL,
+  `taxiKursy` int NOT NULL DEFAULT '0',
+  `tattoos` longtext
+  )
+CREATE TABLE IF NOT EXISTS `user_licenses` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `type` varchar(60) NOT NULL,
+  `grade` int DEFAULT NULL,
+  `owner` varchar(60) NOT NULL,
+  `digit` int DEFAULT '1',
+  `time` int NOT NULL DEFAULT '-1',
+)
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
