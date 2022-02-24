@@ -10,6 +10,7 @@
         "production": "mix --production"
     },
     "devDependencies": {
+        "@nuxtjs/vuetify": "^1.12.3",
         "autoprefixer": "^10.4.0",
         "axios": "^0.21",
         "bootstrap": "^4.6.0",
@@ -42,6 +43,7 @@
         "vue-notification": "^1.3.20",
         "vue-sidebar-menu": "^4.8.1",
         "vuedraggable": "^2.24.3",
-        "vuescroll": "^4.17.3"
+        "vuescroll": "^4.17.3",
+        "vuetify": "^2.6.3"
     }
 }

@@ -23,6 +23,7 @@ import CrimeShow from "./pages/Crime/Show";
 import Others from "./layouts/Others.vue";
 import LicensesIndex from "./pages/Others/Licenses/Index";
 import LicensesList from "./pages/Others/Licenses/List";
+import OthersIndex from "./pages/Others/Index";
 import OthersList from "./pages/Others/List";
 import OthersCreate from "./pages/Others/Create";
 import OthersShow from "./pages/Others/Show";
@@ -147,6 +148,11 @@ const router = new VueRouter({
             component: Others,
             name: "others",
             children: [
+                {
+                    path: '',
+                    name: 'othersIndex',
+                    component: OthersIndex,
+                },
                 {
                     path: 'licenses',
                     name: 'licenses',

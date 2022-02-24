@@ -12,7 +12,6 @@ import { HashLoader } from '@saeris/vue-spinners'
 import { SidebarMenu } from 'vue-sidebar-menu'
 
 export default {
-
     name: "OthersLayout",
     data() {
         return {
@@ -79,7 +78,7 @@ export default {
 
     components: {
         HashLoader,
-        SidebarMenu,
+        SidebarMenu
     },
 }
 </script>
