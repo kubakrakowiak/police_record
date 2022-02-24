@@ -52,7 +52,7 @@ class LicenseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return response()->json($request);
     }
 
     /**
