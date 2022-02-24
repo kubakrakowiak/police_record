@@ -46,6 +46,7 @@ Route::middleware('auth:sanctum')->get('/investigation/{id}', [\App\Http\Control
 Route::group(['prefix' => 'others', 'middleware' => ['auth']], function() {
     Route::group(['prefix' => 'licenses', 'middleware' => ['auth']], function() {
         Route::middleware('auth:sanctum')->get('/list', [\App\Http\Controllers\LicenseController::class, 'index']);
+        Route::middleware('auth:sanctum')->post('/{id}/revoke', [\App\Http\Controllers\LicenseController::class, 'revoke']);
         Route::middleware('auth:sanctum')->get('/history', [\App\Http\Controllers\LicenseController::class, 'history']);
     });
 });

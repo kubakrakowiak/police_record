@@ -4,14 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Character;
 use App\Models\UserLicense;
+use App\Models\UserLicenseLogs;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 
 class LicenseController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function index()
     {
@@ -27,7 +31,7 @@ class LicenseController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function history()
     {
@@ -44,7 +48,7 @@ class LicenseController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -52,10 +56,32 @@ class LicenseController extends Controller
     }
 
     /**
+     * Store a newly created resource in storage.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function revoke(int $id)
+    {
+        $patrol = UserLicense::find($id);
+        $log = UserLicenseLogs::create([
+            'log_type' => 0,
+            'type' => $patrol->type,
+            'owner' => $patrol->owner,
+            'digit' => $patrol->digit,
+            'grade' => $patrol->grade,
+            'user_id' => Auth::user()['id'],
+        ]);
+        $patrol->delete();
+
+        return response(true, 200);
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show($id)
     {
@@ -67,7 +93,7 @@ class LicenseController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function update(Request $request, $id)
     {
@@ -78,7 +104,7 @@ class LicenseController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function destroy($id)
     {

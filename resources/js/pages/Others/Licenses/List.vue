@@ -25,7 +25,7 @@
                                 </div>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-danger btn-sm">Revoke</button>
+                            <button type="button" @click.prevent="revokeLicense(license.id)" class="btn btn-danger btn-sm">Revoke</button>
                             <button type="button" class="btn btn-primary btn-sm">History</button>
                         </td>
                     </tr>
@@ -59,6 +59,24 @@ export default {
                 console.log(error)
             }).finally(() => {
                 this.isLoading = false
+            })
+        },
+
+        revokeLicense: async function(id){
+            await axios.post('/../api/others/licenses/' + id + "/revoke").then(() => {
+                this.$notify({
+                    title: 'Saved',
+                    text: 'Succesful revoked user license!',
+                    type: 'success'
+                });
+            }).catch((error) => {
+                this.$notify({
+                    title: 'Error',
+                    text: error,
+                    type: 'error'
+                });
+            }).finally(() => {
+                this.loadData();
             })
         },
     },
