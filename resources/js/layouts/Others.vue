@@ -30,7 +30,7 @@ export default {
                 {
                     href: '',
                     title: 'Licenses',
-                    icon: 'fas fa-cog',
+                    icon: 'fas fa-id-card',
                     child: [
                         {
                             href: '/others/licenses/list',
@@ -44,8 +44,8 @@ export default {
                 },
                 {
                     href: '',
-                    title: 'Unit',
-                    icon: 'fas fa-users',
+                    title: 'Vehicles',
+                    icon: 'fas fa-car',
                     child: [
                         {
                             href: '/others/vehicles/list',
@@ -60,7 +60,7 @@ export default {
                 {
                     href: '',
                     title: 'Items',
-                    icon: 'fas fa-users',
+                    icon: 'fas fa-hammer',
                     child: [
                         {
                             href: '/others/items/list',

@@ -10,7 +10,7 @@
                     <tr>
                         <th scope="col">Name</th>
                         <th scope="col">Lastname</th>
-                        <th scope="col">Status</th>
+                        <th scope="col">Type</th>
                         <th scope="col">Options</th>
                     </tr>
                     </thead>
@@ -20,9 +20,22 @@
                         <td>{{license.char.firstname}}</td>
                         <td>{{license.char.lastname}}</td>
                         <td>
-                                <div v-if="license.type">
-                                    Weapon permission
-                                </div>
+                            <div v-if="license.type === 'weapon'">
+                                Weapon permission
+                            </div>
+                            <div v-else-if="license.type === 'dmv'">
+                                Drive Theory
+                            </div>
+                            <div v-else-if="license.type === 'drive_bike'">
+                                Driving cat. A
+                            </div>
+                            <div v-else-if="license.type === 'drive'">
+                                Driving cat. B
+                            </div>
+                            <div v-else-if="license.type === 'drive_truck'">
+                                Driving cat. C
+                            </div>
+
                         </td>
                         <td>
                             <button type="button" @click.prevent="revokeLicense(license.id)" class="btn btn-danger btn-sm">Revoke</button>

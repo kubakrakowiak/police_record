@@ -1,23 +1,23 @@
 <template>
     <div class="card">
-        <div class="container m-3">
-            <h1 class="text-2xl font-bold mb-8">Quick license
+        <div class="container m-2">
+            <h1 class="text-2xl font-bold mb-1">Quick license
             </h1>
             <form id="form" class="pr-3">
-                <div>
+                <div class="mb-2">
                     <label class="typo__label">Person</label>
-                    <multiselect v-model="form.characterId" deselect-label="Can't remove this value" track-by="lastname" label="lastname" placeholder="Select one" :options="characters" :searchable="true" :allow-empty="false">
+                    <multiselect v-model="form.character" deselect-label="Can't remove this value" track-by="lastname" label="lastname" placeholder="Select one" :options="characters" :searchable="true" :allow-empty="false">
                         <template slot="singleLabel" slot-scope="{ option }"><strong>{{ option.firstname }} {{ option.lastname }}</strong></template>
                     </multiselect>
                     <span class="text-sm text-red-600 hidden"></span>
                 </div>
                 <div>
-                    <label class="typo__label">Person</label>
+                    <label class="typo__label">Type</label>
                     <multiselect v-model="form.type" deselect-label="Can't remove this value" track-by="name" label="name" placeholder="Select one" :options="types" :searchable="false" :allow-empty="false">
                         <template slot="singleLabel" slot-scope="{ option }"><strong>{{ option.name }}</strong></template>
                     </multiselect>
                 </div>
-                <button type="button" @click.prevent="addLicense" class="btn btn-success btn-sm">Add License</button>
+                <button type="button" @click.prevent="addLicense" class="btn btn-success w-full mt-3">Add License</button>
             </form>
         </div>
     </div>
@@ -55,7 +55,7 @@ export default {
                 }
             ],
             form: {
-                characterId: null,
+                character: null,
                 type: null
             }
         }

@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class UserLicense extends Model
 {
     use HasFactory;
+    public $timestamps = false;
+    protected $fillable = [
+        'type',
+        'digit',
+        'owner'
+    ];
 }

@@ -17,7 +17,6 @@ class CreateUserLicenseLogsTable extends Migration
             $table->id();
             $table->integer('log_type');
             $table->string('type');
-            $table->integer('grade');
             $table->string('owner');
             $table->integer('digit');
             $table->bigInteger('user_id')->unsigned();

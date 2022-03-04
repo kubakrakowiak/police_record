@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Character;
+use App\Models\User;
 use App\Models\UserLicense;
 use App\Models\UserLicenseLogs;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class LicenseController extends Controller
 {
@@ -35,11 +37,13 @@ class LicenseController extends Controller
      */
     public function history()
     {
-        $results = UserLicense::all();
+        $results = UserLicenseLogs::all();
         foreach ($results as $p) {
             $p->char = Character::where('identifier', $p->owner)
                 ->where('digit', $p->digit)
                 ->first();
+            $p->created_format = Carbon::createFromTimestamp($p->created_at)->format('d/m/Y');
+            $p->user = User::find($p->user_id);
         }
         return response()->json($results);
     }
@@ -52,7 +56,36 @@ class LicenseController extends Controller
      */
     public function store(Request $request)
     {
-        return response()->json($request);
+        $type = 'undefined';
+        if ($request->form['type']['id'] == 0){
+            $type = 'weapon';
+        }elseif ($request->form['type']['id'] == 1){
+            $type = 'dmv';
+        }
+        elseif ($request->form['type']['id'] == 2){
+            $type = 'drive_bike';
+        }
+        elseif ($request->form['type']['id'] == 3){
+            $type = 'drive';
+        }
+        elseif ($request->form['type']['id'] == 4){
+            $type = 'drive_truck';
+        }
+        $newLicense = UserLicense::create([
+            'type' => $type,
+            'digit' => $request->form['character']['digit'],
+            'owner' => $request->form['character']['identifier'],
+        ]);
+
+        $log = UserLicenseLogs::create([
+            'log_type' => 1,
+            'type' => $type,
+            'digit' => $request->form['character']['digit'],
+            'owner' => $request->form['character']['identifier'],
+            'user_id' => Auth::user()['id'],
+        ]);
+
+        return response()->json($newLicense);
     }
 
     /**
@@ -69,7 +102,6 @@ class LicenseController extends Controller
             'type' => $patrol->type,
             'owner' => $patrol->owner,
             'digit' => $patrol->digit,
-            'grade' => $patrol->grade,
             'user_id' => Auth::user()['id'],
         ]);
         $patrol->delete();

@@ -66,7 +66,7 @@
                                 <router-link
                                     class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                                     data-toggle="collapse"
-                                    :to="{ name: 'others' }"
+                                    :to="{ name: 'othersIndex' }"
                                 >
                                     Others
                                 </router-link>

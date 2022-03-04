@@ -23,6 +23,7 @@ import CrimeShow from "./pages/Crime/Show";
 import Others from "./layouts/Others.vue";
 import LicensesIndex from "./pages/Others/Licenses/Index";
 import LicensesList from "./pages/Others/Licenses/List";
+import LicensesHistory from "./pages/Others/Licenses/History";
 import OthersIndex from "./pages/Others/Index";
 import OthersList from "./pages/Others/List";
 import OthersCreate from "./pages/Others/Create";
@@ -161,7 +162,12 @@ const router = new VueRouter({
                         {
                             path: 'list',
                             component: LicensesList,
-                            name: 'othersList',
+                            name: 'licensesList',
+                        },
+                        {
+                            path: 'history',
+                            component: LicensesHistory,
+                            name: 'licensesHistory',
                         }
                         ]
                 },
