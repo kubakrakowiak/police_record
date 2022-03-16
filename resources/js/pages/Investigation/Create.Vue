@@ -34,14 +34,14 @@
                 <pre class="language-json"><code>{{ value  }}</code></pre>
                 <span class="text-sm text-red-600 hidden">ź</span>
             </div>
-            <div>
+            <div class="mt-2">
                 <label class="typo__label">Assigned Policemans</label>
                 <multiselect v-model="form.policemans.value" :options="form.policemans.options" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Pick Policemans" label="name" track-by="name" :preselect-first="true">
                     <template slot="selection" slot-scope="{ values, search, isOpen }"><span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen">{{ values.length }} options selected</span></template>
                 </multiselect>
                 <pre class="language-json"><code>{{ value  }}</code></pre>
             </div>
-            <div>
+            <div class="mt-2">
                 <button @click.prevent='onSubmit' class="w-full py-4 bg-blue-600 hover:bg-blue-700 rounded text-sm font-bold text-gray-50 transition duration-200">Start Investigation</button>
             </div>
         </form>

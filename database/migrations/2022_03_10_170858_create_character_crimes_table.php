@@ -2,8 +2,9 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-class CreateCrimeCriminalPivotTable extends Migration
+class CreateCharacterCrimesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,12 +13,11 @@ class CreateCrimeCriminalPivotTable extends Migration
      */
     public function up()
     {
-        Schema::create('crime_criminal', function (Blueprint $table) {
+        Schema::create('crime_character', function (Blueprint $table) {
             $table->unsignedBigInteger('crime_id')->index();
             $table->foreign('crime_id')->references('id')->on('crimes')->onDelete('cascade');
-            $table->unsignedBigInteger('criminal_id')->index();
-            $table->foreign('criminal_id')->references('id')->on('criminals')->onDelete('cascade');
-            $table->primary(['crime_id', 'criminal_id']);
+            $table->integer('character_id')->index();
+            $table->foreign('character_id')->references('id')->on('characters')->onDelete('cascade');
         });
     }
 
@@ -28,6 +28,6 @@ class CreateCrimeCriminalPivotTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('crime_criminal');
+        Schema::dropIfExists('character_crimes');
     }
 }

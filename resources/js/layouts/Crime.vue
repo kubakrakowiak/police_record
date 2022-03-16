@@ -1,7 +1,7 @@
 <template>
     <div class="flex flex-no-wrap bg-gray-200" style="height: 85vh">
         <sidebar-menu :menu="menu" :relative="true" :width="'270px'"/>
-        <div class="container mx-auto py-10 md:w-4/5 w-11/12 px-6 h-96">
+        <div class="container mx-auto py-8 md:w-4/5 w-11/12 px-6 h-96">
             <router-view></router-view>
         </div>
     </div>

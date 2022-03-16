@@ -32,6 +32,6 @@ class CreateUserLicenseLogsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('revoked_licenses');
+        Schema::dropIfExists('user_license_logs');
     }
 }

@@ -61,6 +61,26 @@ class InvestigationController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param  Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function close(Request $request)
+    {
+        $inv = Investigation::all()->find($request->id);
+        if($inv->type == 1 && $inv->created_by == Auth::user()->id){
+            $inv->update([
+                'closed_at' => Carbon::now(),
+                'type' => 0,
+            ]);
+            return response()->json($inv);
+        }
+        else return response()->json("Can't close investigation. Check that you are creator", 500);
+
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request

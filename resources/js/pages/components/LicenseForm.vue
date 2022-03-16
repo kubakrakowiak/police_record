@@ -6,7 +6,7 @@
             <form id="form" class="pr-3">
                 <div class="mb-2">
                     <label class="typo__label">Person</label>
-                    <multiselect v-model="form.character" deselect-label="Can't remove this value" track-by="lastname" label="lastname" placeholder="Select one" :options="characters" :searchable="true" :allow-empty="false">
+                    <multiselect v-model="form.character" deselect-label="Can't remove this value" track-by="fullname" label="fullname" placeholder="Select one" :options="characters" :searchable="true" :allow-empty="false">
                         <template slot="singleLabel" slot-scope="{ option }"><strong>{{ option.firstname }} {{ option.lastname }}</strong></template>
                     </multiselect>
                     <span class="text-sm text-red-600 hidden"></span>

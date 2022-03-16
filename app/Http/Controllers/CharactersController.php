@@ -16,6 +16,9 @@ class CharactersController extends Controller
     public function index()
     {
         $characters = Character::all();
+        foreach ($characters as $value){
+            $value->fullname = $value->firstname . " " . $value->lastname;
+        }
         return response()->json($characters);
     }
 

@@ -42,6 +42,7 @@ Route::middleware('auth:sanctum')->post('/danger-level/store', [\App\Http\Contro
 Route::middleware('auth:sanctum')->get('/investigation', [\App\Http\Controllers\InvestigationController::class, 'index']);
 Route::middleware('auth:sanctum')->post('/investigation/store', [\App\Http\Controllers\InvestigationController::class, 'store']);
 Route::middleware('auth:sanctum')->get('/investigation/{id}', [\App\Http\Controllers\InvestigationController::class, 'show']);
+Route::middleware('auth:sanctum')->post('/investigation/close', [\App\Http\Controllers\InvestigationController::class, 'close']);
 
 Route::group(['prefix' => 'others', 'middleware' => ['auth']], function() {
     Route::group(['prefix' => 'licenses', 'middleware' => ['auth']], function() {

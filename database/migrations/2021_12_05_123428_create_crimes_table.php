@@ -15,12 +15,9 @@ class CreateCrimesTable extends Migration
     {
         Schema::create('crimes', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
             $table->string('desc');
             $table->integer('jail');
             $table->float('fine');
-            //$table->integer('criminal_id')->unsigned();
-            //$table->foreign('criminal_id')->references('id')->on('criminals')->onDelete('cascade');
             $table->timestamps();
         });
     }
