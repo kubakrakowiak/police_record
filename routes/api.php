@@ -53,6 +53,9 @@ Route::group(['prefix' => 'others', 'middleware' => ['auth']], function() {
     });
 });
 
+Route::middleware('auth:sanctum')->get('/tariff', [\App\Http\Controllers\TariffController::class, 'index']);
+
+
 Route::middleware('auth:sanctum')->get('/characters', [\App\Http\Controllers\CharactersController::class, 'index']);
 
 
