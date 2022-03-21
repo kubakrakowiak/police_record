@@ -1,7 +1,7 @@
 ## Required tables from other system
-
+```
 CREATE TABLE IF NOT EXISTS `owned_vehicles` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `owner` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `digit` int DEFAULT '1',
   `co_owner` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
@@ -17,9 +17,9 @@ CREATE TABLE IF NOT EXISTS `owned_vehicles` (
   `job` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
   `destroyed` int DEFAULT NULL,
   `firstmodel` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-  `vehicleid` int DEFAULT NULL,
+  `vehicleid` int DEFAULT NULL
 )
-
+```
 CREATE TABLE IF NOT EXISTS `characters` (
   `id` int NOT NULL AUTO_INCREMENT,
   `identifier` varchar(255) NOT NULL,
