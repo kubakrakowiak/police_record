@@ -20,8 +20,9 @@ CREATE TABLE IF NOT EXISTS `owned_vehicles` (
   `vehicleid` int DEFAULT NULL
 )
 ```
+```
 CREATE TABLE IF NOT EXISTS `characters` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `identifier` varchar(255) NOT NULL,
   `digit` int DEFAULT '1',
   `accounts` varchar(255) DEFAULT NULL,
@@ -48,14 +49,17 @@ CREATE TABLE IF NOT EXISTS `characters` (
   `taxiKursy` int NOT NULL DEFAULT '0',
   `tattoos` longtext
   )
+  ```
+```
 CREATE TABLE IF NOT EXISTS `user_licenses` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `type` varchar(60) NOT NULL,
   `grade` int DEFAULT NULL,
   `owner` varchar(60) NOT NULL,
   `digit` int DEFAULT '1',
-  `time` int NOT NULL DEFAULT '-1',
+  `time` int NOT NULL DEFAULT '-1'
 )
+```
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
