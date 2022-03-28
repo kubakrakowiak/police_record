@@ -26,6 +26,12 @@
                         </tr>
                         </tbody>
                     </table>
+                    <div class="d-flex justify-content-center">
+                        <button v-if="page-1 > 0" class="btn btn-success mr-1" @click="pageChange(page-1)">Prev</button>
+                        <button v-else class="btn btn-success mr-1" disabled>Prev</button>
+                        <button v-if="page+1 <= total" class="btn btn-success" @click="pageChange(page+1)">Next</button>
+                        <button v-else class="btn btn-success" disabled>Next</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -43,6 +49,9 @@ export default {
             user: {},
             policemans: null,
             isLoading: true,
+            page: 1,
+            total: 0,
+            per_page: 10
         }
     },
 
@@ -53,9 +62,15 @@ export default {
     methods: {
         loadData: async function (){
             this.user = JSON.parse(localStorage.getItem('user'));
-            await axios.get('api/policemans').then(data => {
-                this.policemans = data.data
-                console.log(data)
+            await axios.get('api/policemans', {
+                params: {
+                    per_page: this.per_page,
+                    page:     this.page,
+                }
+            }).then(data => {
+                this.policemans = data.data[0]
+                this.total = Math.ceil(data.data[1] / this.per_page)
+                console.log(this.total)
             }).catch(error => {
                 console.log(error)
                 localStorage.setItem('user', null)
@@ -63,6 +78,11 @@ export default {
             }).finally(() => {
                 this.isLoading = false
             })
+        },
+        pageChange: async function(page){
+            this.isLoading = true;
+            this.page = page
+            await this.loadData();
         }
     },
 

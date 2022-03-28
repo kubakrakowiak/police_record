@@ -23,9 +23,9 @@
                         <td>{{crime.created_at}}</td>
                         <td>{{crime.characters_count}}</td>
                         <td>
-<!--                            <router-link :to="{ name: 'investigationShow', params: { id: crime.id }}">-->
+                            <!--                            <router-link :to="{ name: 'investigationShow', params: { id: crime.id }}">-->
                             <button type="button" class="btn btn-primary btn-sm">Details</button>
-<!--                            </router-link>-->
+                            <!--                            </router-link>-->
                             <button type="button" class="btn btn-secondary btn-sm">Close</button>
                         </td>
                     </tr>

@@ -5,16 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Character extends Model
+class Jail extends Model
 {
     use HasFactory;
-    public $timestamps = false;
-    protected $fillable = [
-        'accounts'
-    ];
 
-    public function crimes(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
-    {
-        return $this->belongsToMany(Crime::class, 'crime_character');
-    }
+    protected $table = 'jail';
+
+    public $timestamps = false;
+
+    protected $fillable = [
+        'identifier',
+        'digit',
+        'jail_time',
+        'timeleft',
+        'executed'
+    ];
 }

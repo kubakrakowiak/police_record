@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Character;
 use App\Models\Investigation;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,11 +16,20 @@ class InvestigationController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function index()
+    public function index(Request $request)
     {
-        $results = Investigation::all();
-
-//        $results->created_at->format('d-m-Y');
+        $query = Investigation::query()
+            ->when($request->input('name'), function (Builder $query, string $name) {
+                $query->where('name', 'LIKE', '%' . $name . '%');
+            })
+            ->when($request->input('type') == '0' or $request->input('type') == '1', function (Builder $query, string $type) use ($request) {
+                $query->where('type', '=', intval($request->input('type')));
+            });//todo
+        if ($request->has('per_page')){
+            $results = $query->paginate($request->input('per_page'));
+        }else{
+            $results = $query->get();
+        }
         return response()->json($results);
     }
 

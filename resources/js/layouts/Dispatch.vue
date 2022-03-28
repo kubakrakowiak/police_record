@@ -93,12 +93,6 @@ export default {
                     href: '/dispatch/manage',
                     title: 'Management',
                     icon: 'fas fa-cog',
-                    child: [
-                        {
-                            href: '/charts/sublink',
-                            title: 'Sub Link'
-                        }
-                    ]
                 },
                 {
                     href: '/dispatch/unit',

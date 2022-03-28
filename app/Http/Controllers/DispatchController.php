@@ -31,7 +31,7 @@ class DispatchController extends Controller
             $dispatch->update([
                 'ended_at' => Carbon::now(),
             ]);
-            return response()->json('Done', 200);
+            return response()->json('Done', 201);
         }
         elseif ($dispatch['user_id'] != Auth::user()['id'] && !$dispatch['ended_at']) {
             $dispatch->update([
@@ -41,14 +41,14 @@ class DispatchController extends Controller
                 'user_id' => Auth::user()['id'],
                 'started_at' => Carbon::now()
             ]);
-            return response()->json('Done', 200);
+            return response()->json('Done', 201);
         }
         else {
             $newDispatch = Dispatch::create([
                 'user_id' => Auth::user()['id'],
                 'started_at' => Carbon::now()
             ]);
-            return response()->json('Done', 200);
+            return response()->json('Done', 201);
         }
     }
 

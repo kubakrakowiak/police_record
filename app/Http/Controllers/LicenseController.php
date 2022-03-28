@@ -6,6 +6,7 @@ use App\Models\Character;
 use App\Models\User;
 use App\Models\UserLicense;
 use App\Models\UserLicenseLogs;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -19,14 +20,28 @@ class LicenseController extends Controller
      *
      * @return JsonResponse
      */
-    public function index()
+    public function index(Request $request)
     {
-        $results = UserLicense::all();
+        $query = UserLicense::query()
+            ->when($request->input('type'), function (Builder $query, string $type) {
+                $query->where('type', 'LIKE', '%' . $type . '%');
+            })
+            ->when($request->input('character'), function (Builder $query, string $character) {
+                $query->where('owner', 'LIKE', '%' . json_decode($character)->identifier. '%')
+                ->where('digit', 'LIKE', '%' . json_decode($character)->digit. '%');
+            });
+        if ($request->has('per_page')){
+            $results = $query->paginate($request->input('per_page'));
+        }else{
+            $results = $query->get();
+        }
         foreach ($results as $p) {
-            $p->char = Character::where('identifier', $p->owner)
+            $p->char = Character::query()
+                ->where('identifier', $p->owner)
                 ->where('digit', $p->digit)
                 ->first();
         }
+
         return response()->json($results);
     }
 
@@ -35,9 +50,21 @@ class LicenseController extends Controller
      *
      * @return JsonResponse
      */
-    public function history()
+    public function history(Request $request)
     {
-        $results = UserLicenseLogs::all();
+        $query = UserLicenseLogs::query()
+            ->when($request->input('type'), function (Builder $query, string $type) {
+                $query->where('type', 'LIKE', '%' . $type . '%');
+            })
+            ->when($request->input('character'), function (Builder $query, string $character) {
+                $query->where('owner', 'LIKE', '%' . json_decode($character)->identifier. '%')
+                    ->where('digit', 'LIKE', '%' . json_decode($character)->digit. '%');
+            });
+        if ($request->has('per_page')){
+            $results = $query->paginate($request->input('per_page'));
+        }else{
+            $results = $query->get();
+        }
         foreach ($results as $p) {
             $p->char = Character::where('identifier', $p->owner)
                 ->where('digit', $p->digit)

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Grade;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,16 +13,31 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function index()
+    public function index(Request $request)
     {
         $job_id = Auth::user()->grade->job->id;
         $grades = Grade::where('job_id', '=', $job_id)->pluck('id');
-        $users = User::all()->whereIn('grade_id', $grades);
-        return response()->json($users->load(
-            'grade'
-        ));
+        $query = User::query()
+            ->whereIn('grade_id', $grades)
+            ->when($request->input('name'), function (Builder $query, string $name) {
+                $query->where('name', 'LIKE', '%' . $name . '%');
+            });
+        //$users = $query->paginate(10);
+        if ($request->has('per_page')){
+            $users = $query->paginate($request->input('per_page'));
+            return response()->json([$users->load(
+                'grade'
+            ), $users->total()]);
+        }else
+        {
+            $users = $query->get();
+            return response()->json($users->load(
+                'grade'
+            ));
+        }
+
     }
 
     /**

@@ -34,6 +34,11 @@ export default {
                     icon: 'fas fa-list',
                 },
                 {
+                    href: '/crime/criminals',
+                    title: 'Criminals',
+                    icon: 'fas fa-eye-slash',
+                },
+                {
                     href: '/crime/create',
                     title: 'Create',
                     icon: 'fas fa-plus',

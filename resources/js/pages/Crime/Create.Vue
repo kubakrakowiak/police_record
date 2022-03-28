@@ -9,19 +9,21 @@
                     <div class="card-header">
                         Tariff
                     </div>
-                    <ul class="list-group list-group-flush w-100">
-                        <li class="list-group-item" style="cursor: default" v-for="(tariff, index) in tariffs">
-                            <div class="d-inline align-middle">{{ tariff.name }} <small>{{ tariff.fine }}$$ | {{ tariff.jail }}month</small></div>
-                            <div class="d-inline float-right">
-                                <button class="btn btn-success btn-sm" @click="subCounter(index)">-</button>
-                                <div class="border rounded-circle d-inline p-1 px-2 align-middle">{{ tariff.counter }}</div>
-                                <button class="btn btn-success btn-sm" @click="addCounter(index)">+</button>
-                            </div>
-                        </li>
-                    </ul>
+                    <vuescroll style="height: 450px">
+                        <ul class="list-group list-group-flush w-100">
+                            <li class="list-group-item" style="cursor: default" v-for="(tariff, index) in tariffs">
+                                <div class="d-inline align-middle">{{ tariff.name }} <small>{{ tariff.fine }}$$ | {{ tariff.jail }}month</small></div>
+                                <div class="d-inline float-right">
+                                    <button class="btn btn-success btn-sm" @click="subCounter(index)">-</button>
+                                    <div class="border rounded-circle d-inline p-1 px-2 align-middle">{{ tariff.counter }}</div>
+                                    <button class="btn btn-success btn-sm" @click="addCounter(index)">+</button>
+                                </div>
+                            </li>
+                        </ul>
+                    </vuescroll>
                     <div class="card-footer text-muted">
                         {{ res.message }}
-                        {{ res.jail }}month
+                        {{ res.jail }} month
                         {{ res.fine }}$$
                     </div>
                 </div>
@@ -69,7 +71,7 @@
                         <multiselect v-model="form.characters.value" :options="form.characters.options" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Pick Criminals" label="fullname" track-by="fullname" :preselect-first="true">
                             <template slot="selection" slot-scope="{ values, search, isOpen }"><span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen">{{ values.length }} options selected</span></template>
                         </multiselect>
-                        <pre class="language-json"><code>{{ value  }}</code></pre>
+                        <pre class="language-json"><code></code></pre>
                     </div>
                     <div class="mt-2">
                         <button @click.prevent='onSubmit' class="w-full py-4 bg-blue-600 hover:bg-blue-700 rounded text-sm font-bold text-gray-50 transition duration-200">Report Crime</button>
@@ -83,6 +85,8 @@
 <script>
 import { HashLoader } from '@saeris/vue-spinners';
 import { Multiselect } from 'vue-multiselect';
+import vuescroll from 'vuescroll';
+
 
 export default {
     data() {
@@ -109,7 +113,8 @@ export default {
 
     components: {
         HashLoader,
-        Multiselect
+        Multiselect,
+        vuescroll
     },
 
     methods: {
@@ -148,11 +153,11 @@ export default {
         },
 
         onSubmit: async function(){
-            axios.post('../api/investigation/store', {
-                name: this.form.name,
+            axios.post('../api/crime/store', {
                 desc: this.form.desc,
-                criminals: _.map(this.form.criminals.value, 'id'),
-                type: this.form.type.value.id,
+                characters: _.map(this.form.characters.value, 'id'),
+                jail: this.form.jail,
+                fine: this.form.fine,
             })
                 .then(() => {
                     this.$notify({

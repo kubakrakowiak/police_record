@@ -19,6 +19,7 @@ import Crime from "./layouts/Crime";
 import CrimeIndex from "./pages/Crime/Index";
 import CrimeList from "./pages/Crime/List";
 import CrimeCreate from "./pages/Crime/Create";
+import CrimeCriminals from "./pages/Crime/Criminals";
 import CrimeShow from "./pages/Crime/Show";
 import Others from "./layouts/Others.vue";
 import LicensesIndex from "./pages/Others/Licenses/Index";
@@ -135,6 +136,11 @@ const router = new VueRouter({
                     path: 'create',
                     component: CrimeCreate,
                     name: 'crimeCreate',
+                },
+                {
+                    path: 'criminals',
+                    component: CrimeCriminals,
+                    name: 'crimeCriminals',
                 },
                 {
                     path: ':id',
