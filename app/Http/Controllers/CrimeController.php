@@ -7,6 +7,7 @@ use App\Models\Crime;
 use App\Models\Jail;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class CrimeController extends Controller
 {
@@ -30,6 +31,18 @@ class CrimeController extends Controller
             return response()->json($results);
 
         }
+    }
+
+    public function getCriminalsCrimes(Request $request): \Illuminate\Http\JsonResponse
+    {
+        $results = Character::all()->firstWhere('id', $request->input('character'))->load(['crimes'])->crimes;
+        $page = $request->input('page');
+        $perPage = $request->input('per_page');
+        $collectedData=collect($results);
+
+        $rowData=$collectedData->slice($page*$perPage)->take($perPage);
+
+        return response()->json([$rowData, $results->count()], 200);
     }
 
     /**
