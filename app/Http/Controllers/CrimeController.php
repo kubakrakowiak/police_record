@@ -8,6 +8,7 @@ use App\Models\Jail;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Auth;
 
 class CrimeController extends Controller
 {
@@ -42,7 +43,7 @@ class CrimeController extends Controller
 
         $rowData=$collectedData->slice($page*$perPage)->take($perPage);
 
-        return response()->json([$rowData, $results->count()], 200);
+        return response()->json([json_decode($rowData), $results->count()], 200);
     }
 
     /**
@@ -88,6 +89,7 @@ class CrimeController extends Controller
             'desc' => $request->input('desc'),
             'fine' => $fine,
             'jail' => $jail,
+            'userId' => Auth::user()->id,
         ]);
         $newCrime->characters()->sync((array) $request->input('characters'));
         return response()->json('Done', 201);
@@ -97,11 +99,15 @@ class CrimeController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show($id)
     {
-        //
+        $result = Crime::find($id)->load([
+            'characters',
+            'policeman'
+        ]);
+        return response()->json($result);
     }
 
     /**

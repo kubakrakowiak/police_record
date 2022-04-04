@@ -28,6 +28,11 @@ export default {
                     icon: 'fas fa-tachometer-alt',
                 },
                 {
+                    href: '/others/character',
+                    title: 'Characters',
+                    icon: 'fa fa-users',
+                },
+                {
                     href: '',
                     title: 'Licenses',
                     icon: 'fas fa-id-card',

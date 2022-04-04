@@ -23,6 +23,7 @@
                             <th scope="col">Jail (months)</th>
                             <th scope="col">Fine ($$$)</th>
                             <th scope="col">Date</th>
+                            <th scope="col">Options</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -33,6 +34,11 @@
                                 <td>{{crime.jail}}</td>
                                 <td>{{crime.fine}}</td>
                                 <td>{{crime.created_at}}</td>
+                                <td>
+                                    <router-link :to="{ name: 'crimeShow', params: { id: crime.id }}">
+                                        <button type="button" class="btn btn-primary btn-sm">Details</button>
+                                    </router-link>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -66,7 +72,7 @@ export default {
             crimes: [],
             page: 0,
             total: null,
-            per_page: 10
+            per_page: 8
         }
     },
 
@@ -99,12 +105,12 @@ export default {
                     params: {
                         character: this.character.id,
                         per_page:  this.per_page,
-                        page:      page,
+                        page:      this.page,
                     }
                 }).then(data => {
                     this.crimes = data.data[0];
                     this.total = Math.ceil(data.data[1] / this.per_page)
-                    this.crimes.forEach((item)=>{
+                    this.crimes.forEach(function (item){
                         item.created_at = item.created_at.replace("T", " ").split('.')[0]
                     })
                 }).catch(error => {

@@ -9,21 +9,19 @@
                     <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Reason</th>
-                        <th scope="col">Crime Date</th>
-                        <th scope="col">Criminals</th>
+                        <th scope="col">Firstname</th>
+                        <th scope="col">Lastname</th>
                         <th scope="col">Options</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr
-                        v-for="crime in crimes">
-                        <th scope="row">{{crime.id}}</th>
-                        <th>{{crime.desc}}</th>
-                        <td>{{crime.created_at}}</td>
-                        <td>{{crime.characters_count}}</td>
+                        v-for="character in characters">
+                        <td>{{character.id}}</td>
+                        <td>{{character.firstname}}</td>
+                        <td>{{character.lastname}}</td>
                         <td>
-                            <router-link :to="{ name: 'crimeShow', params: { id: crime.id }}">
+                            <router-link :to="{ name: 'othersCharacterShow', params: { id: character.id }}">
                                 <button type="button" class="btn btn-primary btn-sm">Details</button>
                             </router-link>
                         </td>
@@ -43,50 +41,50 @@
 
 <script>
 import { HashLoader } from '@saeris/vue-spinners'
+import { Multiselect } from 'vue-multiselect';
 
 export default {
     data() {
         return {
             isLoading: true,
-            crimes: [],
+            characters: [],
             page: 1,
-            total: 0,
-            per_page: 10
+            total: null,
+            per_page: 8
         }
     },
 
     components: {
         HashLoader,
+        Multiselect
     },
 
     methods: {
-        loadData: async function (){
-            await axios.get('../api/crime', {
+        loadCharacters: async function (){
+            await axios.get('/../api/characters', {
                 params: {
                     per_page: this.per_page,
                     page:     this.page,
                 }
             }).then(data => {
-                this.crimes = data.data.data
+                this.characters = data.data.data
                 this.total = Math.ceil(data.data.total / this.per_page)
-                this.crimes.forEach((item)=>{
-                    item.created_at = item.created_at.replace("T", " ").split('.')[0]
-                })
             }).catch(error => {
                 console.log(error)
-            }).finally(() => {
-                this.isLoading = false
+            }).finally(() =>{
+                this.isLoading = false;
             })
         },
+
         pageChange: async function(page){
             this.isLoading = true;
-            this.page = page
-            await this.loadData();
-        }
+            this.page = page;
+            await this.loadCharacters();
+        },
     },
 
     async mounted() {
-        await this.loadData();
+        await this.loadCharacters();
     }
 }
 </script>

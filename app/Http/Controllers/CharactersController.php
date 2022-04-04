@@ -13,9 +13,13 @@ class CharactersController extends Controller
      *
      * @return JsonResponse
      */
-    public function index()
+    public function index(Request $request)
     {
-        $characters = Character::all();
+        if ($request->has('per_page')) {
+            $characters = Character::paginate($request->input('per_page'));
+        }else{
+            $characters = Character::all();
+        }
         foreach ($characters as $value){
             $value->fullname = $value->firstname . " " . $value->lastname;
         }
@@ -37,11 +41,12 @@ class CharactersController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
     public function show($id)
     {
-        //
+        $result = Character::find($id);
+        return response()->json($result);
     }
 
     /**

@@ -12,12 +12,18 @@ class Crime extends Model
     protected $fillable = [
         'desc',
         'jail',
-        'fine'
+        'fine',
+        'userId'
     ];
 
     public function characters(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Character::class, 'crime_character');
+    }
+
+    public function policeman(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(User::class, 'userId');
     }
 
 }

@@ -57,12 +57,15 @@ Route::group(['prefix' => 'crime', 'middleware' => ['auth']], function() {
     Route::middleware('auth:sanctum')->get('/', [\App\Http\Controllers\CrimeController::class, 'index']);
     Route::middleware('auth:sanctum')->post('/store', [\App\Http\Controllers\CrimeController::class, 'store']);
     Route::middleware('auth:sanctum')->get('/criminals', [\App\Http\Controllers\CrimeController::class, 'getCriminalsCrimes']);
+    Route::middleware('auth:sanctum')->get('/{id}', [\App\Http\Controllers\CrimeController::class, 'show']);
+
 });
 
 Route::middleware('auth:sanctum')->get('/tariff', [\App\Http\Controllers\TariffController::class, 'index']);
 
 
 Route::middleware('auth:sanctum')->get('/characters', [\App\Http\Controllers\CharactersController::class, 'index']);
+Route::middleware('auth:sanctum')->get('/characters/{id}', [\App\Http\Controllers\CharactersController::class, 'show']);
 
 
 Route::post('login', [LoginController::class, 'login']);

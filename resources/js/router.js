@@ -22,6 +22,8 @@ import CrimeCreate from "./pages/Crime/Create";
 import CrimeCriminals from "./pages/Crime/Criminals";
 import CrimeShow from "./pages/Crime/Show";
 import Others from "./layouts/Others.vue";
+import CharacterIndex from "./pages/Others/Character/Index";
+import CharacterShow from "./pages/Others/Character/Show";
 import LicensesIndex from "./pages/Others/Licenses/Index";
 import LicensesList from "./pages/Others/Licenses/List";
 import LicensesHistory from "./pages/Others/Licenses/History";
@@ -160,6 +162,16 @@ const router = new VueRouter({
                     component: OthersIndex,
                 },
                 {
+                    path: 'character',
+                    component: CharacterIndex,
+                    name: 'othersCharacters',
+                },
+                {
+                    path: 'character/:id',
+                    component: CharacterShow,
+                    name: 'othersCharacterShow',
+                },
+                {
                     path: 'licenses',
                     name: 'licenses',
                     component: LicensesIndex,
@@ -176,21 +188,6 @@ const router = new VueRouter({
                         }
                         ]
                 },
-                {
-                    path: 'list',
-                    component: OthersList,
-                    name: 'othersList',
-                },
-                {
-                    path: 'create',
-                    component: OthersCreate,
-                    name: 'othersCreate',
-                },
-                {
-                    path: ':id',
-                    component: OthersShow,
-                    name: "othersShow"
-                }
             ],
         },
     ]
