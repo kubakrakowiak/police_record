@@ -45,7 +45,11 @@ class CharactersController extends Controller
      */
     public function show($id)
     {
-        $result = Character::find($id);
+        $result = Character::find($id)->load([
+            'investigations',
+            'wanted.user',
+            'crimes',
+        ]);
         return response()->json($result);
     }
 

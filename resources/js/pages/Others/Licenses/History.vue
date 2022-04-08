@@ -64,7 +64,7 @@
                             {{ license.user.last_name }}
                         </td>
                         <td>
-                            {{ license.created_format }}
+                            {{ license.created_at }}
                         </td>
                     </tr>
                     </tbody>

@@ -92,18 +92,28 @@
                                 >
                                     Register
                                 </router-link>
-                                <div
-                                @click="logout">
-                                    <router-link
-                                        class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                                <div>
+                                    <div class="inline-block"
+                                    v-if="isLoggedIn">
+                                        <router-link
+                                            class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                                            data-toggle="collapse"
+                                            v-if="user.permission"
+                                            :to="{ name: 'admin' }"
+                                        >
+                                            Admin Dashboard
+                                        </router-link>
+
+                                    </div>
+                                    <div
+                                        class="inline-block text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                                         data-toggle="collapse"
                                         v-if="isLoggedIn"
-                                        :to="{ name: 'login' }"
+                                        @click="logout"
                                     >
                                         Logout
-                                    </router-link>
+                                    </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -144,7 +154,8 @@ export default {
             await axios.get('/sanctum/csrf-cookie')
             await axios.post('/api/logout').then(response => {
                 if (response.data.success) {
-                    window.location.href = "/";
+                    localStorage.removeItem('user');
+                    this.isLoggedIn();
                 } else {
                     console.log(response);
                 }
@@ -153,6 +164,7 @@ export default {
                     console.error(error);
                 }).finally(function (){
                     localStorage.setItem('user', null);
+                    window.location.href = "/";
                 });
         }
     },

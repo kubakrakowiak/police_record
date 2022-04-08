@@ -69,7 +69,6 @@ class LicenseController extends Controller
             $p->char = Character::where('identifier', $p->owner)
                 ->where('digit', $p->digit)
                 ->first();
-            $p->created_format = Carbon::createFromTimestamp($p->created_at)->format('d/m/Y');
             $p->user = User::find($p->user_id);
         }
         return response()->json($results);

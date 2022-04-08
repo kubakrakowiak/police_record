@@ -17,4 +17,16 @@ class Character extends Model
     {
         return $this->belongsToMany(Crime::class, 'crime_character');
     }
+
+    public function investigations(){
+        return $this->belongsToMany(Investigation::class, 'character_investigation');
+    }
+
+    public function licenses(){
+        return $this->hasMany(UserLicense::class);
+    }
+
+    public function wanted(){
+        return $this->hasMany(Wanted::class);
+    }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Character;
 use App\Models\Investigation;
+use App\Models\InvestigationComment;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -65,8 +66,10 @@ class InvestigationController extends Controller
     public function show($id)
     {
         return response()->json(Investigation::all()->find($id)->load([
-            'users',
-            'creator'
+            'users.grade',
+            'creator',
+            'comments.user',
+            'suspects',
         ]));
     }
 
@@ -87,6 +90,24 @@ class InvestigationController extends Controller
             return response()->json($inv);
         }
         else return response()->json("Can't close investigation. Check that you are creator", 500);
+
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function attachSuspects(Request $request): \Illuminate\Http\JsonResponse
+    {
+        $inv = Investigation::all()->find($request->investigationId);
+        if ($inv->type == 1){
+            $inv->suspects()->sync((array) $request->input('characters'));
+            return response()->json("Done");
+        } else {
+            return response()->json("Check the investigation is still open", 500);
+        }
 
     }
 

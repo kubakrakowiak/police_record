@@ -31,6 +31,10 @@ import OthersIndex from "./pages/Others/Index";
 import OthersList from "./pages/Others/List";
 import OthersCreate from "./pages/Others/Create";
 import OthersShow from "./pages/Others/Show";
+import Admin from "./layouts/Admin";
+import AdminIndex from "./pages/Admin/Index";
+import AdminCreateUser from "./pages/Admin/CreateUser";
+import AdminListUser from "./pages/Admin/ListUser";
 
 
 Vue.use(VueRouter);
@@ -189,6 +193,26 @@ const router = new VueRouter({
                         ]
                 },
             ],
+        },
+        {
+            path: '/admin',
+            component: Admin,
+            children: [
+                {
+                    path: '',
+                    component: AdminIndex,
+                    name: 'admin',
+                },
+                {
+                    path: 'create-user',
+                    component: AdminCreateUser,
+                    name: 'adminCreateUser',
+                },
+                {
+                    path: 'users',
+                    component: AdminListUser,
+                    name: 'adminListUser',
+                }],
         },
     ]
 });

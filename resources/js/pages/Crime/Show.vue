@@ -59,9 +59,6 @@ export default {
         loadData: async function() {
             await axios.get('../api/crime/'+this.crime.id).then(data => {
                 this.crime = data.data
-                if (this.crime.created_at){
-                    this.crime.created_at = this.crime.created_at.replace("T", " ").split('.')[0]
-                }
             }).catch(error => {
                 console.log(error)
             }).finally(() => {

@@ -21,6 +21,8 @@ use App\Models\User;
 
 Route::middleware('auth:sanctum')->get('/user', [LoginController::class, 'getUser']);
 
+Route::middleware('auth:sanctum')->get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'index']);
+
 Route::middleware('auth:sanctum')->get('/duty', [\App\Http\Controllers\DutyController::class, 'getDuty']);
 Route::middleware('auth:sanctum')->post('/duty/set', [\App\Http\Controllers\DutyController::class, 'setDuty']);
 Route::middleware('auth:sanctum')->get('/duty/count', [\App\Http\Controllers\DutyController::class, 'countDuty']);
@@ -39,10 +41,17 @@ Route::middleware('auth:sanctum')->post('/units/destroy/{id}', [\App\Http\Contro
 Route::middleware('auth:sanctum')->get('/danger-level', [\App\Http\Controllers\DangerLevelController::class, 'index']);
 Route::middleware('auth:sanctum')->post('/danger-level/store', [\App\Http\Controllers\DangerLevelController::class, 'store']);
 
-Route::middleware('auth:sanctum')->get('/investigation', [\App\Http\Controllers\InvestigationController::class, 'index']);
-Route::middleware('auth:sanctum')->post('/investigation/store', [\App\Http\Controllers\InvestigationController::class, 'store']);
-Route::middleware('auth:sanctum')->get('/investigation/{id}', [\App\Http\Controllers\InvestigationController::class, 'show']);
-Route::middleware('auth:sanctum')->post('/investigation/close', [\App\Http\Controllers\InvestigationController::class, 'close']);
+Route::group(['prefix' => 'investigation', 'middleware' => ['auth']], function() {
+    Route::middleware('auth:sanctum')->get('/', [\App\Http\Controllers\InvestigationController::class, 'index']);
+    Route::middleware('auth:sanctum')->post('/store', [\App\Http\Controllers\InvestigationController::class, 'store']);
+    Route::middleware('auth:sanctum')->post('/attach', [\App\Http\Controllers\InvestigationController::class, 'attachSuspects']);
+    Route::middleware('auth:sanctum')->get('/{id}', [\App\Http\Controllers\InvestigationController::class, 'show']);
+    Route::middleware('auth:sanctum')->post('/close', [\App\Http\Controllers\InvestigationController::class, 'close']);
+    Route::middleware('auth:sanctum')->post('/comment', [\App\Http\Controllers\InvestigationCommentController::class, 'store']);
+});
+
+Route::middleware('auth:sanctum')->post('/wanted-create', [\App\Http\Controllers\WantedController::class, 'store']);
+Route::middleware('auth:sanctum')->post('/wanted-destroy', [\App\Http\Controllers\WantedController::class, 'destroy']);
 
 Route::group(['prefix' => 'others', 'middleware' => ['auth']], function() {
     Route::group(['prefix' => 'licenses', 'middleware' => ['auth']], function() {

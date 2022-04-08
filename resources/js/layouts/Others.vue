@@ -51,6 +51,7 @@ export default {
                     href: '',
                     title: 'Vehicles',
                     icon: 'fas fa-car',
+                    disabled: true,
                     child: [
                         {
                             href: '/others/vehicles/list',
@@ -66,6 +67,7 @@ export default {
                     href: '',
                     title: 'Items',
                     icon: 'fas fa-hammer',
+                    disabled: true,
                     child: [
                         {
                             href: '/others/items/list',

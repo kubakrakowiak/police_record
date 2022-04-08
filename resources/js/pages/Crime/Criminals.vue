@@ -110,9 +110,6 @@ export default {
                 }).then(data => {
                     this.crimes = data.data[0];
                     this.total = Math.ceil(data.data[1] / this.per_page)
-                    this.crimes.forEach(function (item){
-                        item.created_at = item.created_at.replace("T", " ").split('.')[0]
-                    })
                 }).catch(error => {
                     console.log(error)
                 }).finally(() => {

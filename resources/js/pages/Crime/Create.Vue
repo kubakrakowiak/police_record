@@ -124,8 +124,6 @@ export default {
             }).catch(error => {
                 console.log(error)
             })
-
-
         },
         loadTariff: async function (){
             await axios.get('/../api/tariff').then(data => {

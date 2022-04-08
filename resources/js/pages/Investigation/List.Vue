@@ -44,7 +44,7 @@
                             <router-link :to="{ name: 'investigationShow', params: { id: investigation.id }}">
                                 <button type="button" class="btn btn-primary btn-sm">Details</button>
                             </router-link>
-                            <button type="button" class="btn btn-secondary btn-sm">Close</button>
+                            <button type="button" @click="close(investigation.id)" class="btn btn-secondary btn-sm">Close</button>
                         </td>
                     </tr>
                     </tbody>
@@ -121,6 +121,25 @@ export default {
         },
         onFilterSubmit: async function (){
             this.isLoading = true;
+            await this.loadData();
+        },
+
+        close: async function(id) {
+            await axios.post('../api/investigation/close', {
+                id: id
+            }).then(data => {
+                this.$notify({
+                    title: 'Investigation Closed',
+                    text: 'Correctly closed investigation',
+                    type: 'success'
+                })
+            }).catch(error => {
+                this.$notify({
+                    title: 'Error',
+                    text: error.response.data,
+                    type: 'error'
+                })
+            })
             await this.loadData();
         }
     },

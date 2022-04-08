@@ -6,19 +6,22 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class UserLicenseLogs extends Model
+class InvestigationComment extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'log_type',
-        'type',
-        'owner',
-        'digit',
-        'grade',
+        'content',
         'user_id',
+        'investigation_id',
     ];
 
-    public function user(){
+    public function investigation()
+    {
+        return $this->belongsTo(Investigation::class);
+    }
+
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 
@@ -29,6 +32,6 @@ class UserLicenseLogs extends Model
 
     public function getUpdatedAtAttribute($date)
     {
-        return Carbon::createFromTimeString($date)->format('Y-m-d H:i');
+        return Carbon::createFromTimeString($date)->format('Y-m-d H:i:s');
     }
 }

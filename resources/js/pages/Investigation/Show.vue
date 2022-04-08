@@ -7,58 +7,118 @@
             <div class="col-6">
                 <h1 class="display-4 mb-4">Investigation</h1>
             </div>
-            <div class="col-5">
+            <div class="col-6">
                 <div class="row justify-content-end">
                     <div class="col-8">
-                        <button v-if="investigation.closed_at" disabled class="btn btn-secondary mt-4">Closed</button>
-                        <button v-else @click="close" class="btn btn-secondary mt-4">Close</button>
-                        <button class="btn btn-primary mt-4">Add comment</button>
+                        <button v-if="investigation.closed_at" disabled class="btn btn-secondary">Closed</button>
+                        <button v-else @click="close" class="btn btn-secondary">Close</button>
+                        <button v-if="investigation.closed_at" disabled type="button" class="btn btn-secondary">
+                            Add comment
+                        </button>
+                        <button v-else type="button" @click="loadCommentModalToggle" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModalCenter">
+                            Add comment
+                        </button>
+                        <button v-if="investigation.closed_at" disabled type="button" class="btn btn-secondary">
+                            Attach suspects
+                        </button>
+                        <button type="button" @click="loadSuspectsModalToggle" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter2">
+                            Attach suspects
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="card d-inline-block" style="width: 16rem;">
-            <div class="card-body">
-                <h5 class="card-title">Name</h5>
-                <h6 class="card-subtitle mb-2 text-muted">{{ investigation.name }}</h6>
+        <div class="row">
+            <div class="col-3">
+                <div class="card">
+                    <div class="card-header">
+                        Title/Name: {{ investigation.name }}
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li style="cursor: default" class="list-group-item">Creator: <small>{{ investigation.creator.name }} {{ investigation.creator.last_name }}</small></li>
+                        <li style="cursor: default" class="list-group-item">Create Date: <small>{{ investigation.created_at }}</small></li>
+                        <li style="cursor: default" class="list-group-item">Closing Date: <small>{{ investigation.closed_at }}</small></li>
+                    </ul>
+                </div>
+                <div class="card mt-1">
+                    <div class="card-header">
+                        Assigned Policemans
+                    </div>
+                    <vuescroll style="height: 270px">
+                        <ul class="list-group list-group-flush">
+                            <li style="cursor: default" class="list-group-item" v-for="user in investigation.users">{{ user.name }} {{ user.last_name }} <small>{{user.grade.name}}</small></li>
+                        </ul>
+                    </vuescroll>
+                </div>
             </div>
-        </div>
-        <div class="card d-inline-block" style="width: 16rem;">
-            <div class="card-body">
-                <h5 class="card-title">Creator</h5>
-                <h6 class="card-subtitle mb-2 text-muted">{{ investigation.creator.name }} {{ investigation.creator.last_name }}</h6>
-            </div>
-        </div>
-        <div class="card d-inline-block" style="width: 16rem;">
-            <div class="card-body">
-                <h5 class="card-title">Create Date</h5>
-                <h6 class="card-subtitle mb-2 text-muted">{{ investigation.created_at }}</h6>
-            </div>
-        </div>
-        <div class="card d-inline-block" style="width: 16rem;" v-if="investigation.closed_at">
-            <div class="card-body">
-                <h5 class="card-title">Close Date</h5>
-                <h6 class="card-subtitle mb-2 text-muted">{{ investigation.closed_at }}</h6>
-            </div>
-        </div>
-        <div class="card d-inline-block" style="width: 19rem;">
-            <div class="card-body">
-                <h5 class="card-title">Description</h5>
-                <h6 class="card-subtitle mb-2 text-muted">{{ investigation.desc }}</h6>
-            </div>
-        </div>
-        <div class="card d-inline-block" style="width: 19rem;">
-            <div class="card-body">
-                <h5 class="card-title">Assigned Policemans</h5>
-                <h6 class="card-subtitle mb-2 text-muted" v-for="user in investigation.users">{{ user.name }} {{ user.last_name }}</h6>
+            <div class="col-9">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="card">
+                            <div class="card-header">
+                                Description
+                            </div>
+                            <vuescroll style="height: 150px">
+                                <div class="card-body">
+                                        {{ investigation.desc }}
+                                </div>
+                            </vuescroll>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="card">
+                            <div class="card-header">
+                                Suspects
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <vuescroll style="height: 150px">
+                                    <li style="cursor: default" v-for="suspect in investigation.suspects" class="list-group-item"> {{suspect.firstname}} {{suspect.lastname}} </li>
+                                </vuescroll>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-1">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                Comments
+                            </div>
+                            <vuescroll style="height: 250px">
+                                <div class="card-body">
+                                    <div v-for="comment in investigation.comments">
+                                        {{ comment.user.name }}
+                                        {{ comment.user.last_name }}
+                                        <small>{{ comment.created_at }}</small>
+                                        <p>
+                                            {{ comment.content }}
+                                        </p>
+                                        <hr class="my-3">
+                                    </div>
+                                </div>
+                            </vuescroll>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" v-if="loadCommentModal" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <AddCommentModal @clicked="loadData" :id="investigation.id"></AddCommentModal>
+        </div>
+
+        <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" v-if="loadSuspectsModal" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <AttachSuspectsModal @clicked="loadData" :id="investigation.id"></AttachSuspectsModal>
+        </div>
     </div>
 </template>
 
 <script>
 import {HashLoader} from "@saeris/vue-spinners";
+import vuescroll from 'vuescroll';
+
+import AttachSuspectsModal from "../components/Investigation/AttachSuspectsModal";
+import AddCommentModal from "../components/Investigation/AddCommentModal";
 
 export default {
     name: "InvestigationShow",
@@ -74,12 +134,17 @@ export default {
                 closed_at: '',
                 users: []
             },
+            loadSuspectsModal: false,
+            loadCommentModal: false,
             isLoading: true
         }
     },
 
     components: {
-        HashLoader
+        HashLoader,
+        vuescroll,
+        AttachSuspectsModal,
+        AddCommentModal
     },
 
     methods: {
@@ -108,6 +173,12 @@ export default {
                     type: 'error'
                 })
             })
+        },
+        loadCommentModalToggle: function (){
+            this.loadCommentModal = true
+        },
+        loadSuspectsModalToggle: function (){
+            this.loadSuspectsModal = true
         }
     },
 

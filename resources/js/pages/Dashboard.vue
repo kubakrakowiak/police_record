@@ -84,32 +84,24 @@
             <div class="row justify-content-center">
                 <div class="col-md-6">
                     <div class="card">
-                        <div class="card-header">Dashboard</div>
+                        <div class="card-header">Opened Investigations</div>
 
-                        <div class="card-body">Dashboard Page</div>
+                        <div class="card-body text-center display-4">{{stats.investigations}}</div>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="card">
-                        <div class="card-header">Dashboard</div>
-
-                        <div class="card-body">Dashboard Page</div>
+                        <div class="card-header">Wanted in City</div>
+                        <div class="card-body text-center display-4">{{stats.wanted}}</div>
                     </div>
                 </div>
             </div>
             <div class="row justify-content-center pt-4">
                 <div class="col-md-6">
                     <div class="card">
-                        <div class="card-header">Dashboard</div>
+                        <div class="card-header">Crimes in last 24h</div>
 
-                        <div class="card-body">Dashboard Page</div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header">Dashboard</div>
-
-                        <div class="card-body">Dashboard Page</div>
+                        <div class="card-body text-center display-4">{{ stats.crimes }}</div>
                     </div>
                 </div>
             </div>
@@ -136,6 +128,11 @@ export default {
                     name: '',
                 },
             },
+            stats: {
+                investigations: null,
+                wanted: null,
+                crimes: null,
+            },
             dispatchUser: {},
             dangerLevel: {},
             isLoading: true,
@@ -149,6 +146,7 @@ export default {
     async mounted() {
         //localStorage.setItem('user', null);
         this.user = JSON.parse(localStorage.getItem('user'));
+        await this.loadStats();
         await this.getAllDuties();
         await this.isOnDuty();
         await this.getDangerLevel();
@@ -176,6 +174,14 @@ export default {
         getAllDuties: async function(){
             await axios.get('api/duty/count').then((data)=>{
                 this.dutyCount = data.data.length;
+            })
+        },
+
+        loadStats: async function(){
+            await axios.get('api/dashboard').then((data)=>{
+                this.stats.investigations = data.data[0];
+                this.stats.wanted = data.data[1];
+                this.stats.crimes = data.data[2];
             })
         },
 

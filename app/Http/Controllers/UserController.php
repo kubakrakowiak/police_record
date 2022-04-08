@@ -27,9 +27,9 @@ class UserController extends Controller
         //$users = $query->paginate(10);
         if ($request->has('per_page')){
             $users = $query->paginate($request->input('per_page'));
-            return response()->json([$users->load(
+            return response()->json([$users->load([
                 'grade'
-            ), $users->total()]);
+            ]), $users->total()]);
         }else
         {
             $users = $query->get();

@@ -7,7 +7,7 @@
         <div v-else class="container-fluid mt-5">
             <div class="row justify-content-center">
                 <div class="col-md-10">
-                    <table class="table table-dark">
+                    <table class="table">
                         <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -39,11 +39,10 @@
 </template>
 
 <script>
-import { HashLoader } from '@saeris/vue-spinners'
+import {HashLoader} from "@saeris/vue-spinners";
 
 export default {
-
-    name: "Policemans",
+    name: "ListUser",
     data() {
         return {
             user: {},
@@ -62,7 +61,7 @@ export default {
     methods: {
         loadData: async function (){
             this.user = JSON.parse(localStorage.getItem('user'));
-            await axios.get('api/policemans', {
+            await axios.get('/api/policemans', {
                 params: {
                     per_page: this.per_page,
                     page:     this.page,
@@ -90,6 +89,9 @@ export default {
         await this.loadData();
     }
 
-
 }
 </script>
+
+<style scoped>
+
+</style>
