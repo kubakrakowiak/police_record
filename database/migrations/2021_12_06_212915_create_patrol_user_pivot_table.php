@@ -17,7 +17,7 @@ class CreatePatrolUserPivotTable extends Migration
             $table->unsignedBigInteger('patrol_id')->index();
             $table->foreign('patrol_id')->references('id')->on('patrols')->onDelete('cascade');
             $table->unsignedBigInteger('user_id')->index();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('pr_users')->onDelete('cascade');
             $table->primary(['patrol_id', 'user_id']);
         });
     }

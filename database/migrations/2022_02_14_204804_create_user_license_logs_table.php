@@ -20,7 +20,7 @@ class CreateUserLicenseLogsTable extends Migration
             $table->string('owner');
             $table->integer('digit');
             $table->bigInteger('user_id')->unsigned();
-            $table->foreign('user_id')->on('users')->references('id');
+            $table->foreign('user_id')->on('pr_users')->references('id');
             $table->timestamps();
         });
     }

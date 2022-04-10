@@ -19,7 +19,7 @@ class CreateCrimesTable extends Migration
             $table->integer('jail');
             $table->float('fine');
             $table->bigInteger('userId')->unsigned();
-            $table->foreign('userId')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('userId')->references('id')->on('pr_users')->onDelete('cascade');
             $table->timestamps();
         });
     }

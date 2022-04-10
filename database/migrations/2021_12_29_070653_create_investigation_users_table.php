@@ -13,9 +13,9 @@ class CreateInvestigationUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('investigation_user', function (Blueprint $table) {
+        Schema::create('investigation_users', function (Blueprint $table) {
             $table->unsignedBigInteger('user_id')->index();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('pr_users')->onDelete('cascade');
             $table->unsignedBigInteger('investigation_id')->index();
             $table->foreign('investigation_id')->references('id')->on('investigations')->onDelete('cascade');
             $table->primary(['user_id', 'investigation_id']);

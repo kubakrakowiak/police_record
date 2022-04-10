@@ -16,7 +16,7 @@ class CreateDispatchesTable extends Migration
         Schema::create('dispatches', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('pr_users')->onDelete('cascade');
             $table->dateTime('started_at')->nullable();
             $table->dateTime('ended_at')->nullable();
             $table->timestamps();

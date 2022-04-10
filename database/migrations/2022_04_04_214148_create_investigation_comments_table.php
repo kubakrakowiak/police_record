@@ -19,7 +19,7 @@ class CreateInvestigationCommentsTable extends Migration
             $table->unsignedBigInteger('investigation_id')->index();
             $table->foreign('investigation_id')->references('id')->on('investigations')->onDelete('cascade');
             $table->unsignedBigInteger('user_id')->index();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('pr_users')->onDelete('cascade');
             $table->timestamps();
         });
     }

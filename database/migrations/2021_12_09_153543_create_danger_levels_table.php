@@ -20,7 +20,7 @@ class CreateDangerLevelsTable extends Migration
             $table->dateTime('started_at');
             $table->dateTime('ended_at')->nullable();
             $table->unsignedBigInteger('user_id')->index();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('pr_users')->onDelete('cascade');
             $table->timestamps();
         });
     }

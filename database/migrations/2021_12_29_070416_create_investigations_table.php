@@ -20,7 +20,7 @@ class CreateInvestigationsTable extends Migration
             $table->bigInteger('created_by')->unsigned();
             $table->integer('type');
             $table->dateTime('closed_at')->nullable();
-            $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('created_by')->references('id')->on('pr_users')->onDelete('cascade');
             $table->timestamps();
         });
     }

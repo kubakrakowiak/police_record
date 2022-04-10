@@ -16,7 +16,7 @@ class CreateDutiesTable extends Migration
         Schema::create('duties', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('pr_users')->onDelete('cascade');
             $table->dateTime('start_duty')->nullable();
             $table->dateTime('end_duty')->nullable();
             $table->timestamps();
