@@ -62091,7 +62091,7 @@ var render = function () {
                   : _c(
                       "button",
                       {
-                        staticClass: "btn btn-secondary",
+                        staticClass: "btn btn-primary",
                         attrs: {
                           type: "button",
                           "data-toggle": "modal",
@@ -62119,25 +62119,23 @@ var render = function () {
                         ),
                       ]
                     )
-                  : _vm._e(),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-primary",
-                    attrs: {
-                      type: "button",
-                      "data-toggle": "modal",
-                      "data-target": "#exampleModalCenter2",
-                    },
-                    on: { click: _vm.loadSuspectsModalToggle },
-                  },
-                  [
-                    _vm._v(
-                      "\n                        Attach suspects\n                    "
+                  : _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        attrs: {
+                          type: "button",
+                          "data-toggle": "modal",
+                          "data-target": "#exampleModalCenter2",
+                        },
+                        on: { click: _vm.loadSuspectsModalToggle },
+                      },
+                      [
+                        _vm._v(
+                          "\n                        Attach suspects\n                    "
+                        ),
+                      ]
                     ),
-                  ]
-                ),
               ]),
             ]),
           ]),

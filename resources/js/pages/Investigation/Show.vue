@@ -15,13 +15,13 @@
                         <button v-if="investigation.closed_at" disabled type="button" class="btn btn-secondary">
                             Add comment
                         </button>
-                        <button v-else type="button" @click="loadCommentModalToggle" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModalCenter">
+                        <button v-else type="button" @click="loadCommentModalToggle" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
                             Add comment
                         </button>
                         <button v-if="investigation.closed_at" disabled type="button" class="btn btn-secondary">
                             Attach suspects
                         </button>
-                        <button type="button" @click="loadSuspectsModalToggle" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter2">
+                        <button v-else type="button" @click="loadSuspectsModalToggle" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter2">
                             Attach suspects
                         </button>
                     </div>
