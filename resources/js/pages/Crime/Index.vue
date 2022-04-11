@@ -1,10 +1,13 @@
 <template>
-    <div class="bg-white w-1/3 rounded-xl shadow-lg flex items-center justify-around">
-        <div class="text-center">
-            <h1 class="text-4xl font-bold text-gray-800">9.7k</h1>
-            <span class="text-gray-500">Kids</span>
+<!--    <div class="bg-white w-1/3 rounded-xl shadow-lg flex items-center justify-around"></div>-->
+        <div>
+            <div>
+                <h2 class="h2 justify-center flex content-center" style="font-family: 'Roboto'">Crime Software developed by Craco</h2>
+            </div>
+            <div>
+                <h3 class="h3 justify-center flex content-center" style="font-family: 'Roboto'">v0.9 beta production</h3>
+            </div>
         </div>
-    </div>
 </template>
 
 <script>

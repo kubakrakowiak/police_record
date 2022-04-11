@@ -9680,6 +9680,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "ListUser",
@@ -9690,7 +9694,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       isLoading: true,
       page: 1,
       total: 0,
-      per_page: 10
+      per_page: 8
     };
   },
   components: {
@@ -9738,26 +9742,65 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return loadData;
     }(),
-    pageChange: function () {
-      var _pageChange = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2(page) {
+    destroy: function () {
+      var _destroy = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2(id) {
+        var _this2 = this;
+
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                this.isLoading = true;
-                this.page = page;
-                _context2.next = 4;
-                return this.loadData();
+                _context2.next = 2;
+                return axios.post('/api/user/delete/' + id).then(function (data) {
+                  _this2.loadData();
 
-              case 4:
+                  _this2.$notify({
+                    title: 'Saved',
+                    text: 'Succesful deleted user!',
+                    type: 'success'
+                  });
+                })["catch"](function (error) {
+                  _this2.$notify({
+                    title: 'Error',
+                    text: error,
+                    type: 'Error'
+                  });
+                });
+
+              case 2:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, this);
+        }, _callee2);
       }));
 
-      function pageChange(_x) {
+      function destroy(_x) {
+        return _destroy.apply(this, arguments);
+      }
+
+      return destroy;
+    }(),
+    pageChange: function () {
+      var _pageChange = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3(page) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                this.isLoading = true;
+                this.page = page;
+                _context3.next = 4;
+                return this.loadData();
+
+              case 4:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, this);
+      }));
+
+      function pageChange(_x2) {
         return _pageChange.apply(this, arguments);
       }
 
@@ -9765,22 +9808,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }()
   },
   mounted: function mounted() {
-    var _this2 = this;
+    var _this3 = this;
 
-    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
         while (1) {
-          switch (_context3.prev = _context3.next) {
+          switch (_context4.prev = _context4.next) {
             case 0:
-              _context3.next = 2;
-              return _this2.loadData();
+              _context4.next = 2;
+              return _this3.loadData();
 
             case 2:
             case "end":
-              return _context3.stop();
+              return _context4.stop();
           }
         }
-      }, _callee3);
+      }, _callee4);
     }))();
   }
 });
@@ -10360,6 +10403,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _saeris_vue_spinners__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @saeris/vue-spinners */ "./node_modules/@saeris/vue-spinners/lib/@saeris/vue-spinners.common.js");
 /* harmony import */ var _saeris_vue_spinners__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_saeris_vue_spinners__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
+//
 //
 //
 //
@@ -12170,6 +12216,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _saeris_vue_spinners__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @saeris/vue-spinners */ "./node_modules/@saeris/vue-spinners/lib/@saeris/vue-spinners.common.js");
 /* harmony import */ var _saeris_vue_spinners__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_saeris_vue_spinners__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
 //
 //
 //
@@ -59459,6 +59507,21 @@ var render = function () {
                       _c("td", [_vm._v(_vm._s(policeman.last_name))]),
                       _vm._v(" "),
                       _c("td", [_vm._v(_vm._s(policeman.grade.name))]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-danger mr-1",
+                            on: {
+                              click: function ($event) {
+                                return _vm.destroy(policeman.id)
+                              },
+                            },
+                          },
+                          [_vm._v("Delete")]
+                        ),
+                      ]),
                     ])
                   }),
                   0
@@ -59529,6 +59592,8 @@ var staticRenderFns = [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Last")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Grade")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Options")]),
       ]),
     ])
   },
@@ -60117,22 +60182,29 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass:
-          "bg-white w-1/3 rounded-xl shadow-lg flex items-center justify-around",
-      },
-      [
-        _c("div", { staticClass: "text-center" }, [
-          _c("h1", { staticClass: "text-4xl font-bold text-gray-800" }, [
-            _vm._v("9.7k"),
-          ]),
-          _vm._v(" "),
-          _c("span", { staticClass: "text-gray-500" }, [_vm._v("Kids")]),
-        ]),
-      ]
-    )
+    return _c("div", [
+      _c("div", [
+        _c(
+          "h2",
+          {
+            staticClass: "h2 justify-center flex content-center",
+            staticStyle: { "font-family": "'Roboto'" },
+          },
+          [_vm._v("Crime Software developed by Craco")]
+        ),
+      ]),
+      _vm._v(" "),
+      _c("div", [
+        _c(
+          "h3",
+          {
+            staticClass: "h3 justify-center flex content-center",
+            staticStyle: { "font-family": "'Roboto'" },
+          },
+          [_vm._v("v0.9 beta production")]
+        ),
+      ]),
+    ])
   },
 ]
 render._withStripped = true
@@ -61675,22 +61747,29 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass:
-          "bg-white w-1/3 rounded-xl shadow-lg flex items-center justify-around",
-      },
-      [
-        _c("div", { staticClass: "text-center" }, [
-          _c("h1", { staticClass: "text-4xl font-bold text-gray-800" }, [
-            _vm._v("9.7k"),
-          ]),
-          _vm._v(" "),
-          _c("span", { staticClass: "text-gray-500" }, [_vm._v("Kids")]),
-        ]),
-      ]
-    )
+    return _c("div", [
+      _c("div", [
+        _c(
+          "h2",
+          {
+            staticClass: "h2 justify-center flex content-center",
+            staticStyle: { "font-family": "'Roboto'" },
+          },
+          [_vm._v("Investigation Software developed by Craco")]
+        ),
+      ]),
+      _vm._v(" "),
+      _c("div", [
+        _c(
+          "h3",
+          {
+            staticClass: "h3 justify-center flex content-center",
+            staticStyle: { "font-family": "'Roboto'" },
+          },
+          [_vm._v("v0.8 beta production")]
+        ),
+      ]),
+    ])
   },
 ]
 render._withStripped = true

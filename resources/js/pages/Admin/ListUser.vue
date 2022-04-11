@@ -14,6 +14,7 @@
                             <th scope="col">First</th>
                             <th scope="col">Last</th>
                             <th scope="col">Grade</th>
+                            <th scope="col">Options</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -23,6 +24,9 @@
                             <td>{{ policeman.name }}</td>
                             <td>{{ policeman.last_name }}</td>
                             <td>{{ policeman.grade.name }}</td>
+                            <td>
+                                <button class="btn btn-danger mr-1" @click="destroy(policeman.id)">Delete</button>
+                            </td>
                         </tr>
                         </tbody>
                     </table>
@@ -50,7 +54,7 @@ export default {
             isLoading: true,
             page: 1,
             total: 0,
-            per_page: 10
+            per_page: 8
         }
     },
 
@@ -76,6 +80,22 @@ export default {
                 window.location.href = "/";
             }).finally(() => {
                 this.isLoading = false
+            })
+        },
+        destroy: async function (id){
+            await axios.post('/api/user/delete/' + id).then(data => {
+                this.loadData();
+                this.$notify({
+                    title: 'Saved',
+                    text: 'Succesful deleted user!',
+                    type: 'success'
+                });
+            }).catch(error => {
+                this.$notify({
+                    title: 'Error',
+                    text: error,
+                    type: 'Error'
+                });
             })
         },
         pageChange: async function(page){
