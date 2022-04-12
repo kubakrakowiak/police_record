@@ -21,6 +21,7 @@ use App\Models\User;
 
 Route::middleware('auth:sanctum')->get('/user', [LoginController::class, 'getUser']);
 Route::middleware('auth:sanctum')->post('/user/delete/{id}', [\App\Http\Controllers\UserController::class, 'destroy']);
+Route::middleware('auth:sanctum')->get('/admin/user/{id}', [\App\Http\Controllers\UserController::class, 'show']);
 
 Route::middleware('auth:sanctum')->get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'index']);
 

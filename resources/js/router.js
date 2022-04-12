@@ -33,8 +33,9 @@ import OthersCreate from "./pages/Others/Create";
 import OthersShow from "./pages/Others/Show";
 import Admin from "./layouts/Admin";
 import AdminIndex from "./pages/Admin/Index";
-import AdminCreateUser from "./pages/Admin/CreateUser";
-import AdminListUser from "./pages/Admin/ListUser";
+import AdminCreateUser from "./pages/Admin/User/Create";
+import AdminListUser from "./pages/Admin/User/List";
+import AdminEditUser from "./pages/Admin/User/Edit";
 
 
 Vue.use(VueRouter);
@@ -204,15 +205,21 @@ const router = new VueRouter({
                     name: 'admin',
                 },
                 {
-                    path: 'create-user',
+                    path: 'user/create',
                     component: AdminCreateUser,
                     name: 'adminCreateUser',
                 },
                 {
-                    path: 'users',
+                    path: 'user/list',
                     component: AdminListUser,
                     name: 'adminListUser',
-                }],
+                },
+                {
+                    path: 'user/:id',
+                    component: AdminEditUser,
+                    name: 'adminEditUser',
+                },
+            ],
         },
     ]
 });

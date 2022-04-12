@@ -29,14 +29,19 @@ export default {
                     icon: 'fas fa-tachometer-alt',
                 },
                 {
-                    href: '/admin/create-user',
-                    title: 'Create User',
-                    icon: 'fas fa-user',
-                },
-                {
-                    href: '/admin/users',
+                    href: '',
                     title: 'Users',
                     icon: 'fas fa-user',
+                    child: [
+                        {
+                            href: '/admin/user/list',
+                            title: 'List'
+                        },
+                        {
+                            href: '/admin/user/create',
+                            title: 'Create'
+                        }
+                    ]
                 },
             ]
 

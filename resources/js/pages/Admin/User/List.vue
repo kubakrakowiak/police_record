@@ -25,7 +25,8 @@
                             <td>{{ policeman.last_name }}</td>
                             <td>{{ policeman.grade.name }}</td>
                             <td>
-                                <button class="btn btn-danger mr-1" @click="destroy(policeman.id)">Delete</button>
+                                <button class="btn-sm btn-primary mr-1">Edit</button>
+                                <button class="btn-sm btn-danger mr-1" @click="destroy(policeman.id)">Delete</button>
                             </td>
                         </tr>
                         </tbody>
@@ -43,7 +44,7 @@
 </template>
 
 <script>
-import {HashLoader} from "@saeris/vue-spinners";
+import HashLoader from "@saeris/vue-spinners";
 
 export default {
     name: "ListUser",
@@ -94,7 +95,7 @@ export default {
                 this.$notify({
                     title: 'Error',
                     text: error,
-                    type: 'Error'
+                    type: 'error'
                 });
             })
         },
