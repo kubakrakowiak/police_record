@@ -17,7 +17,7 @@ class CreateGradesTable extends Migration
             $table->id();
             $table->string('name');
             $table->bigInteger('job_id')->unsigned();
-            $table->foreign('job_id')->references('id')->on('jobs')->onDelete('cascade');
+            $table->foreign('job_id')->references('id')->on('pr_jobs')->onDelete('cascade');
             $table->integer('abilities')->unsigned();
             $table->timestamps();
         });
