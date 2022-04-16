@@ -15573,11 +15573,12 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_37__["default"]({
     path: '/login',
     name: 'login',
     component: _pages_Login_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
-  }, {
-    path: '/register',
-    name: 'register',
-    component: _pages_Register_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
-  }, {
+  }, // {
+  //     path: '/register',
+  //     name: 'register',
+  //     component: Register
+  // },
+  {
     path: '/dashboard',
     name: 'dashboard',
     component: _pages_Dashboard_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
@@ -59011,7 +59012,7 @@ var render = function () {
                           },
                           [
                             _vm._v(
-                              "\n                                Dashboard\n                            "
+                              "\n                                    Dashboard\n                                "
                             ),
                           ]
                         ),
@@ -59028,7 +59029,7 @@ var render = function () {
                           },
                           [
                             _vm._v(
-                              "\n                                Policemans\n                            "
+                              "\n                                    Policemans\n                                "
                             ),
                           ]
                         ),
@@ -59045,7 +59046,7 @@ var render = function () {
                           },
                           [
                             _vm._v(
-                              "\n                                Dispatch\n                            "
+                              "\n                                    Dispatch\n                                "
                             ),
                           ]
                         ),
@@ -59062,7 +59063,7 @@ var render = function () {
                           },
                           [
                             _vm._v(
-                              "\n                                Investigation\n                            "
+                              "\n                                    Investigation\n                                "
                             ),
                           ]
                         ),
@@ -59079,7 +59080,7 @@ var render = function () {
                           },
                           [
                             _vm._v(
-                              "\n                                Crime\n                            "
+                              "\n                                    Crime\n                                "
                             ),
                           ]
                         ),
@@ -59096,7 +59097,7 @@ var render = function () {
                           },
                           [
                             _vm._v(
-                              "\n                                Others\n                            "
+                              "\n                                    Others\n                                "
                             ),
                           ]
                         ),
@@ -59131,26 +59132,7 @@ var render = function () {
                               },
                               [
                                 _vm._v(
-                                  "\n                                Login\n                            "
-                                ),
-                              ]
-                            )
-                          : _vm._e(),
-                        _vm._v(" "),
-                        !_vm.isLoggedIn
-                          ? _c(
-                              "router-link",
-                              {
-                                staticClass:
-                                  "text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium",
-                                attrs: {
-                                  "data-toggle": "collapse",
-                                  to: { name: "register" },
-                                },
-                              },
-                              [
-                                _vm._v(
-                                  "\n                                Register\n                            "
+                                  "\n                                    Login\n                                "
                                 ),
                               ]
                             )
@@ -59175,7 +59157,7 @@ var render = function () {
                                         },
                                         [
                                           _vm._v(
-                                            "\n                                        Admin Dashboard\n                                    "
+                                            "\n                                            Admin Dashboard\n                                        "
                                           ),
                                         ]
                                       )
@@ -59196,7 +59178,7 @@ var render = function () {
                                 },
                                 [
                                   _vm._v(
-                                    "\n                                    Logout\n                                "
+                                    "\n                                        Logout\n                                    "
                                   ),
                                 ]
                               )
