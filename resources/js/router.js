@@ -61,11 +61,11 @@ const router = new VueRouter({
             name: 'login',
             component: Login
         },
-        {
-            path: '/register',
-            name: 'register',
-            component: Register
-        },
+        // {
+        //     path: '/register',
+        //     name: 'register',
+        //     component: Register
+        // },
         {
             path: '/dashboard',
             name: 'dashboard',

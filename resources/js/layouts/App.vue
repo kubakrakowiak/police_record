@@ -84,14 +84,14 @@
                                 >
                                     Login
                                 </router-link>
-                                <router-link
-                                    class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                                    data-toggle="collapse"
-                                    v-if="!isLoggedIn"
-                                    :to="{ name: 'register' }"
-                                >
-                                    Register
-                                </router-link>
+<!--                                <router-link-->
+<!--                                    class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"-->
+<!--                                    data-toggle="collapse"-->
+<!--                                    v-if="!isLoggedIn"-->
+<!--                                    :to="{ name: 'register' }"-->
+<!--                                >-->
+<!--                                    Register-->
+<!--                                </router-link>-->
                                 <div>
                                     <div class="inline-block"
                                     v-if="isLoggedIn">
