@@ -15351,6 +15351,17 @@ if (token) {
 } else {
   console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
+
+axios.interceptors.response.use(function (response) {
+  return response;
+}, function (error) {
+  if (error.response.status === 401 || error.response.status === 419) {
+    localStorage.removeItem('user');
+    window.location.href = "/clear";
+  }
+
+  return error;
+});
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -15366,7 +15377,6 @@ if (token) {
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-
 
 var app = new vue__WEBPACK_IMPORTED_MODULE_3__["default"]({
   router: _router__WEBPACK_IMPORTED_MODULE_0__["default"],

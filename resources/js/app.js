@@ -17,6 +17,17 @@ if (token) {
     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
 
+axios.interceptors.response.use(response => {
+    return response;
+}, error => {
+    if (error.response.status === 401 || error.response.status === 419) {
+        localStorage.removeItem('user');
+        window.location.href = "/clear";
+    }
+    return error;
+});
+
+
 
 /**
  * The following block of code may be used to automatically register your

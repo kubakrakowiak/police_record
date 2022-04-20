@@ -21,8 +21,8 @@ Route::get('/clear', function() {
     Artisan::call('config:cache');
     Artisan::call('view:clear');
 
-    return "Cleared!";
-
+    header('Location: ' . env('APP_URL') . ':8000/login');
+    die();
 });
 
 Route::get('/{any}', function () {
