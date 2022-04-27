@@ -9635,6 +9635,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _saeris_vue_spinners__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @saeris/vue-spinners */ "./node_modules/@saeris/vue-spinners/lib/@saeris/vue-spinners.common.js");
+/* harmony import */ var _saeris_vue_spinners__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_saeris_vue_spinners__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
+/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_2__);
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -9645,6 +9649,40 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Edit",
   data: function data() {
@@ -9652,8 +9690,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       user: {
         id: this.$route.params.id
       },
+      grades: [],
       isLoading: true
     };
+  },
+  components: {
+    HashLoader: _saeris_vue_spinners__WEBPACK_IMPORTED_MODULE_1__.HashLoader,
+    Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_2__.Multiselect
   },
   methods: {
     loadData: function () {
@@ -9666,7 +9709,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context.next = 2;
                 return axios.get('/api/admin/user/' + this.user.id).then(function (data) {
-                  _this.user = data.data[0];
+                  _this.user = data.data;
                 })["catch"](function (error) {
                   console.log(error);
                 })["finally"](function () {
@@ -9686,25 +9729,102 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
 
       return loadData;
+    }(),
+    loadGrades: function () {
+      var _loadGrades = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var _this2 = this;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return axios.get('/api/grade/list').then(function (data) {
+                  _this2.grades = data.data;
+                })["catch"](function (error) {
+                  console.log(error);
+                })["finally"](function () {
+                  _this2.isLoading = false;
+                });
+
+              case 2:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }));
+
+      function loadGrades() {
+        return _loadGrades.apply(this, arguments);
+      }
+
+      return loadGrades;
+    }(),
+    onSubmit: function () {
+      var _onSubmit = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+        var _this3 = this;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                axios.post('/api/admin/user', {
+                  data: this.user
+                }).then(function (data) {
+                  _this3.$notify({
+                    title: 'Saved',
+                    text: 'Succesful updated user!',
+                    type: 'success'
+                  });
+                })["catch"](function (error) {
+                  _this3.$notify({
+                    title: 'Error',
+                    text: error,
+                    type: 'Error'
+                  });
+                })["finally"](function () {
+                  _this3.$router.push({
+                    name: 'adminListUser'
+                  });
+                });
+
+              case 1:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, this);
+      }));
+
+      function onSubmit() {
+        return _onSubmit.apply(this, arguments);
+      }
+
+      return onSubmit;
     }()
   },
   mounted: function mounted() {
-    var _this2 = this;
+    var _this4 = this;
 
-    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
         while (1) {
-          switch (_context2.prev = _context2.next) {
+          switch (_context4.prev = _context4.next) {
             case 0:
-              _context2.next = 2;
-              return _this2.loadData();
+              _context4.next = 2;
+              return _this4.loadData();
 
             case 2:
+              _context4.next = 4;
+              return _this4.loadGrades();
+
+            case 4:
             case "end":
-              return _context2.stop();
+              return _context4.stop();
           }
         }
-      }, _callee2);
+      }, _callee4);
     }))();
   }
 });
@@ -9732,6 +9852,8 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
 //
 //
 //
@@ -59657,7 +59779,222 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _c("div", [
+    _vm.isLoading
+      ? _c("div", [_c("hash-loader")], 1)
+      : _c("form", [
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "inputEmail1" } }, [
+              _vm._v("Email address"),
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.user.email,
+                  expression: "user.email",
+                },
+              ],
+              staticClass: "form-control",
+              attrs: {
+                type: "email",
+                id: "inputEmail1",
+                "aria-describedby": "emailHelp",
+              },
+              domProps: { value: _vm.user.email },
+              on: {
+                input: function ($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.user, "email", $event.target.value)
+                },
+              },
+            }),
+            _vm._v(" "),
+            _c(
+              "small",
+              {
+                staticClass: "form-text text-muted",
+                attrs: { id: "emailHelp" },
+              },
+              [_vm._v("We'll never share your email with anyone else.")]
+            ),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "inputName" } }, [_vm._v("Name")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.user.name,
+                  expression: "user.name",
+                },
+              ],
+              staticClass: "form-control",
+              attrs: {
+                type: "text",
+                id: "inputName",
+                "aria-describedby": "nameHelp",
+              },
+              domProps: { value: _vm.user.name },
+              on: {
+                input: function ($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.user, "name", $event.target.value)
+                },
+              },
+            }),
+            _vm._v(" "),
+            _c(
+              "small",
+              {
+                staticClass: "form-text text-muted",
+                attrs: { id: "nameHelp" },
+              },
+              [_vm._v("We'll never share your email with anyone else.")]
+            ),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "inputLastname" } }, [
+              _vm._v("Lastname"),
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.user.last_name,
+                  expression: "user.last_name",
+                },
+              ],
+              staticClass: "form-control",
+              attrs: {
+                type: "text",
+                id: "inputLastname",
+                "aria-describedby": "lastnameHelp",
+              },
+              domProps: { value: _vm.user.last_name },
+              on: {
+                input: function ($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.user, "last_name", $event.target.value)
+                },
+              },
+            }),
+            _vm._v(" "),
+            _c(
+              "small",
+              {
+                staticClass: "form-text text-muted",
+                attrs: { id: "lastnameHelp" },
+              },
+              [_vm._v("We'll never share your email with anyone else.")]
+            ),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "inputEmail1" } }, [
+              _vm._v("Permission"),
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.user.permission,
+                  expression: "user.permission",
+                },
+              ],
+              staticClass: "form-control",
+              attrs: {
+                type: "number",
+                id: "inputPermission",
+                "aria-describedby": "permissionHelp",
+              },
+              domProps: { value: _vm.user.permission },
+              on: {
+                input: function ($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.user, "permission", $event.target.value)
+                },
+              },
+            }),
+            _vm._v(" "),
+            _c(
+              "small",
+              {
+                staticClass: "form-text text-muted",
+                attrs: { id: "permissionHelp" },
+              },
+              [_vm._v("We'll never share your email with anyone else.")]
+            ),
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "form-group" },
+            [
+              _c("multiselect", {
+                attrs: {
+                  "deselect-label": "Remove this value",
+                  "track-by": "name",
+                  label: "name",
+                  placeholder: "Select Type",
+                  options: _vm.grades,
+                  searchable: true,
+                  "allow-empty": true,
+                },
+                scopedSlots: _vm._u([
+                  {
+                    key: "singleLabel",
+                    fn: function (ref) {
+                      var option = ref.option
+                      return [_c("strong", [_vm._v(_vm._s(option.name))])]
+                    },
+                  },
+                ]),
+                model: {
+                  value: _vm.user.grade,
+                  callback: function ($$v) {
+                    _vm.$set(_vm.user, "grade", $$v)
+                  },
+                  expression: "user.grade",
+                },
+              }),
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary",
+              on: {
+                click: function ($event) {
+                  $event.preventDefault()
+                  return _vm.onSubmit.apply(null, arguments)
+                },
+              },
+            },
+            [_vm._v("Submit")]
+          ),
+        ]),
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -59710,26 +60047,43 @@ var render = function () {
                       _vm._v(" "),
                       _c("td", [_vm._v(_vm._s(policeman.grade.name))]),
                       _vm._v(" "),
-                      _c("td", [
-                        _c(
-                          "button",
-                          { staticClass: "btn-sm btn-primary mr-1" },
-                          [_vm._v("Edit")]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn-sm btn-danger mr-1",
-                            on: {
-                              click: function ($event) {
-                                return _vm.destroy(policeman.id)
+                      _c(
+                        "td",
+                        [
+                          _c(
+                            "router-link",
+                            {
+                              attrs: {
+                                to: {
+                                  name: "adminEditUser",
+                                  params: { id: policeman.id },
+                                },
                               },
                             },
-                          },
-                          [_vm._v("Delete")]
-                        ),
-                      ]),
+                            [
+                              _c(
+                                "button",
+                                { staticClass: "btn-sm btn-primary mr-1" },
+                                [_vm._v("Edit")]
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn-sm btn-danger mr-1",
+                              on: {
+                                click: function ($event) {
+                                  return _vm.destroy(policeman.id)
+                                },
+                              },
+                            },
+                            [_vm._v("Delete")]
+                          ),
+                        ],
+                        1
+                      ),
                     ])
                   }),
                   0

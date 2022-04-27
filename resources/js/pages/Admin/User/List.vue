@@ -25,7 +25,9 @@
                             <td>{{ policeman.last_name }}</td>
                             <td>{{ policeman.grade.name }}</td>
                             <td>
-                                <button class="btn-sm btn-primary mr-1">Edit</button>
+                                <router-link :to="{ name: 'adminEditUser', params: { id: policeman.id } }">
+                                    <button class="btn-sm btn-primary mr-1">Edit</button>
+                                </router-link>
                                 <button class="btn-sm btn-danger mr-1" @click="destroy(policeman.id)">Delete</button>
                             </td>
                         </tr>

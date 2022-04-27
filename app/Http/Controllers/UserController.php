@@ -73,9 +73,21 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        if (Auth::user()->permission > 0){
+            $user = User::find($request->data['id']);
+            $user->update([
+                'name' => $request->data['name'],
+                'last_name' => $request->data['last_name'],
+                'email' => $request->data['email'],
+                'permission' => $request->data['permission'],
+            ]);
+            $grade = Grade::find($request->data['grade']['id']);
+            $grade->users()->save($user);
+            return response($user);
+        }
+        else return response('error', 500);
     }
 
     /**

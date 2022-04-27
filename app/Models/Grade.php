@@ -13,4 +13,9 @@ class Grade extends Model
     {
         return $this->belongsTo(Job::class);
     }
+
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 }
