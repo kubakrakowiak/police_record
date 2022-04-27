@@ -21,7 +21,12 @@ use App\Models\User;
 
 Route::middleware('auth:sanctum')->get('/user', [LoginController::class, 'getUser']);
 Route::middleware('auth:sanctum')->post('/user/delete/{id}', [\App\Http\Controllers\UserController::class, 'destroy']);
-Route::middleware('auth:sanctum')->get('/admin/user/{id}', [\App\Http\Controllers\UserController::class, 'show']);
+
+Route::group(['prefix' => 'admin/', 'middleware' => ['auth']], function(){
+    Route::get('user/{id}', [\App\Http\Controllers\UserController::class, 'show']);
+    Route::post('user', [\App\Http\Controllers\UserController::class, 'update']);
+});
+
 
 Route::middleware('auth:sanctum')->get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'index']);
 
@@ -70,6 +75,10 @@ Route::group(['prefix' => 'crime', 'middleware' => ['auth']], function() {
     Route::middleware('auth:sanctum')->get('/criminals', [\App\Http\Controllers\CrimeController::class, 'getCriminalsCrimes']);
     Route::middleware('auth:sanctum')->get('/{id}', [\App\Http\Controllers\CrimeController::class, 'show']);
 
+});
+
+Route::group(['prefix' => 'grade', 'middleware' => ['auth']], function() {
+    Route::middleware('auth:sanctum')->get('/list', [\App\Http\Controllers\GradesController::class, 'index']);
 });
 
 Route::middleware('auth:sanctum')->get('/tariff', [\App\Http\Controllers\TariffController::class, 'index']);
