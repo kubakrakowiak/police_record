@@ -25,6 +25,11 @@ Route::middleware('auth:sanctum')->post('/user/delete/{id}', [\App\Http\Controll
 Route::group(['prefix' => 'admin/', 'middleware' => ['auth']], function(){
     Route::get('user/{id}', [\App\Http\Controllers\UserController::class, 'show']);
     Route::post('user', [\App\Http\Controllers\UserController::class, 'update']);
+    Route::post('grade/order', [\App\Http\Controllers\GradesController::class, 'updateOrder']);
+    Route::get('grade/{id}', [\App\Http\Controllers\GradesController::class, 'show']);
+    Route::post('grade/{id}', [\App\Http\Controllers\GradesController::class, 'update']);
+    Route::post('grade', [\App\Http\Controllers\GradesController::class, 'create']);
+    Route::post('grade/destroy/{id}', [\App\Http\Controllers\GradesController::class, 'destroy']);
 });
 
 
