@@ -8,6 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Grade extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'order',
+        'name',
+        'job_id',
+        'abilities'
+    ];
 
     public function job()
     {

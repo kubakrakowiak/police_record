@@ -43,6 +43,11 @@ export default {
                         }
                     ]
                 },
+                {
+                    href: '/admin/grade/list',
+                    title: 'Grades',
+                    icon: 'fas fa-address-card',
+                },
             ]
 
         }

@@ -36,6 +36,7 @@ import AdminIndex from "./pages/Admin/Index";
 import AdminCreateUser from "./pages/Admin/User/Create";
 import AdminListUser from "./pages/Admin/User/List";
 import AdminEditUser from "./pages/Admin/User/Edit";
+import AdminListGrade from "./pages/Admin/Grade/List";
 
 
 Vue.use(VueRouter);
@@ -218,6 +219,11 @@ const router = new VueRouter({
                     path: 'user/:id',
                     component: AdminEditUser,
                     name: 'adminEditUser',
+                },
+                {
+                    path: 'grade/list',
+                    component: AdminListGrade,
+                    name: 'adminListGrade',
                 },
             ],
         },

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Character;
 use App\Models\Crime;
 use App\Models\Jail;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -60,6 +61,7 @@ class CrimeController extends Controller
         ]);
         $fine = $request->input('fine');
         $jail = $request->input('jail');
+        $timeleft = Carbon::now()->addSecond($jail*4);
         foreach ($request->input('characters') as $item) {
             $char = Character::all()->find($item);
             if ($fine > 0){
@@ -76,8 +78,8 @@ class CrimeController extends Controller
                 Jail::create([
                     'identifier' => $char->identifier,
                     'digit' => $char->digit,
-                    'jail_time' => 2160,
-                    'timeleft' => 12121212,
+                    'jail_time' => $jail,
+                    'timeleft' => $timeleft,
                     'executed' => 0
                 ]);
             }

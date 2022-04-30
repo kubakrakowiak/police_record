@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGradesTable extends Migration
+class UpdateGradesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,8 @@ class CreateGradesTable extends Migration
      */
     public function up()
     {
-        Schema::create('grades', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->bigInteger('job_id')->unsigned();
-            $table->foreign('job_id')->references('id')->on('pr_jobs')->onDelete('cascade');
-            $table->integer('abilities')->unsigned();
+        Schema::table('grades', function (Blueprint $table) {
             $table->integer('order')->unsigned();
-            $table->timestamps();
         });
     }
 
