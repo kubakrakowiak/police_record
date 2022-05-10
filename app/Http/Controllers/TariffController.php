@@ -12,8 +12,12 @@ class TariffController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->has('per_page')){
+            $tariffs = Tariff::paginate($request->input('per_page'));
+            return response()->json([$tariffs]);
+        }
         return response()->json(Tariff::all());
     }
 
@@ -21,22 +25,28 @@ class TariffController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
     {
-        //
+        Tariff::create([
+            'name' => $request['data']['name'],
+            'fine' => $request['data']['fine'],
+            'jail' => $request['data']['jail'],
+        ]);
+
+        return response()->json('done', 200);
     }
 
     /**
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show($id)
     {
-        //
+        return response()->json(Tariff::find($id));
     }
 
     /**
@@ -44,11 +54,18 @@ class TariffController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, $id)
     {
-        //
+        $tariff = Tariff::find($id);
+        $tariff->update([
+            'name' => $request['data']['name'],
+            'fine' => $request['data']['fine'],
+            'jail' => $request['data']['jail'],
+        ]);
+
+        return response()->json('done', 200);
     }
 
     /**
@@ -59,6 +76,7 @@ class TariffController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Tariff::find($id)->delete();
+        return response(200);
     }
 }
