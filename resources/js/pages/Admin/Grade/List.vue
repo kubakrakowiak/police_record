@@ -28,7 +28,7 @@
             <button class="btn btn-success" @click.prevent="onSubmit">Save order</button>
             <button class="btn btn-success" @click.prevent="onClick(null)">New Grade</button>
             <div class="modal fade" id="modal" tabindex="-1" role="dialog">
-                <GradeModal :id="idToModal"></GradeModal>
+                <GradeModal @clicked="loadGrades" :id="idToModal"></GradeModal>
             </div>
         </div>
     </div>

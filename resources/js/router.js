@@ -37,6 +37,7 @@ import AdminCreateUser from "./pages/Admin/User/Create";
 import AdminListUser from "./pages/Admin/User/List";
 import AdminEditUser from "./pages/Admin/User/Edit";
 import AdminListGrade from "./pages/Admin/Grade/List";
+import AdminListTariff from "./pages/Admin/Tariff/List";
 
 
 Vue.use(VueRouter);
@@ -224,6 +225,11 @@ const router = new VueRouter({
                     path: 'grade/list',
                     component: AdminListGrade,
                     name: 'adminListGrade',
+                },
+                {
+                    path: 'tariff',
+                    component: AdminListTariff,
+                    name: 'adminListTariff',
                 },
             ],
         },

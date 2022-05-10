@@ -18,7 +18,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" @click.prevent="onSubmit" class="btn btn-primary">Save changes</button>
+                <button type="button" @click.prevent="onSubmit" data-dismiss="modal" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>
@@ -74,7 +74,8 @@ export default {
             }).catch(error => {
                 console.log(error)
             }).finally(() => {
-                this.isLoading = false
+                this.isLoading = false;
+                this.$emit('clicked');
             })
         }
     },

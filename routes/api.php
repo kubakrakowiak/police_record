@@ -27,9 +27,14 @@ Route::group(['prefix' => 'admin/', 'middleware' => ['auth']], function(){
     Route::post('user', [\App\Http\Controllers\UserController::class, 'update']);
     Route::post('grade/order', [\App\Http\Controllers\GradesController::class, 'updateOrder']);
     Route::get('grade/{id}', [\App\Http\Controllers\GradesController::class, 'show']);
-    Route::post('grade/{id}', [\App\Http\Controllers\GradesController::class, 'update']);
     Route::post('grade', [\App\Http\Controllers\GradesController::class, 'create']);
+    Route::post('grade/{id}', [\App\Http\Controllers\GradesController::class, 'update']);
     Route::post('grade/destroy/{id}', [\App\Http\Controllers\GradesController::class, 'destroy']);
+    Route::get('tariff', [\App\Http\Controllers\TariffController::class, 'index']);
+    Route::post('tariff', [\App\Http\Controllers\TariffController::class, 'store']);
+    Route::get('tariff/{id}', [\App\Http\Controllers\TariffController::class, 'show']);
+    Route::post('tariff/{id}', [\App\Http\Controllers\TariffController::class, 'update']);
+    Route::post('tariff/destroy/{id}', [\App\Http\Controllers\TariffController::class, 'destroy']);
 });
 
 

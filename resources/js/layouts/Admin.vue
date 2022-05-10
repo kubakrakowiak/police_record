@@ -48,6 +48,11 @@ export default {
                     title: 'Grades',
                     icon: 'fas fa-address-card',
                 },
+                {
+                    href: '/admin/tariff',
+                    title: 'Tariffs',
+                    icon: 'fas fa-list',
+                },
             ]
 
         }
