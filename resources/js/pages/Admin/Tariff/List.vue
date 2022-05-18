@@ -9,15 +9,15 @@
                 <button class="btn btn-success" @click.prevent="onClick(null)">New Tariff</button>
             </div>
             <div class="row justify-content-center">
-                <div class="col-10">
+                <div class="col-12">
                     <table class="table">
                         <thead>
                         <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Fine</th>
-                            <th scope="col">Jain</th>
-                            <th scope="col">Options</th>
+                            <th scope="col" class="col-1">#</th>
+                            <th scope="col" class="col-5">Name</th>
+                            <th scope="col" class="col-2">Fine</th>
+                            <th scope="col" class="col-2">Jain</th>
+                            <th scope="col" class="col-2">Options</th>
                         </tr>
                         </thead>
                         <tbody>

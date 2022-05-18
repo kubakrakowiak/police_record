@@ -9737,6 +9737,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Index"
 });
@@ -60888,9 +60895,38 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _vm._m(0)
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c("div", [
+        _c(
+          "h2",
+          {
+            staticClass: "h2 justify-center flex content-center",
+            staticStyle: { "font-family": "'Roboto'" },
+          },
+          [_vm._v("ACP Software developed by Craco")]
+        ),
+      ]),
+      _vm._v(" "),
+      _c("div", [
+        _c(
+          "h3",
+          {
+            staticClass: "h3 justify-center flex content-center",
+            staticStyle: { "font-family": "'Roboto'" },
+          },
+          [_vm._v("v0.6.0-alpha Administration Control Panel ")]
+        ),
+      ]),
+    ])
+  },
+]
 render._withStripped = true
 
 
@@ -60939,7 +60975,7 @@ var render = function () {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "row justify-content-center" }, [
-            _c("div", { staticClass: "col-10" }, [
+            _c("div", { staticClass: "col-12" }, [
               _c("table", { staticClass: "table" }, [
                 _vm._m(0),
                 _vm._v(" "),
@@ -61062,15 +61098,25 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
+        _c("th", { staticClass: "col-1", attrs: { scope: "col" } }, [
+          _vm._v("#"),
+        ]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Name")]),
+        _c("th", { staticClass: "col-5", attrs: { scope: "col" } }, [
+          _vm._v("Name"),
+        ]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Fine")]),
+        _c("th", { staticClass: "col-2", attrs: { scope: "col" } }, [
+          _vm._v("Fine"),
+        ]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Jain")]),
+        _c("th", { staticClass: "col-2", attrs: { scope: "col" } }, [
+          _vm._v("Jain"),
+        ]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Options")]),
+        _c("th", { staticClass: "col-2", attrs: { scope: "col" } }, [
+          _vm._v("Options"),
+        ]),
       ]),
     ])
   },
@@ -62751,7 +62797,7 @@ var render = function () {
                                 },
                                 [
                                   _vm._v(
-                                    "\n                                Wyjdz z sluzby\n                            "
+                                    "\n                                Duty Off\n                            "
                                   ),
                                 ]
                               )
@@ -62763,7 +62809,7 @@ var render = function () {
                                 },
                                 [
                                   _vm._v(
-                                    "\n                                Wejdz na sluzbe\n                            "
+                                    "\n                                Duty On\n                            "
                                   ),
                                 ]
                               ),
