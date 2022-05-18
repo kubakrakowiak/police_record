@@ -60,13 +60,13 @@
                                     v-if="onDuty"
                                     class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
                                 >
-                                    Wyjdz z sluzby
+                                    Duty Off
                                 </div>
                                 <div
                                     v-else
                                     class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
                                 >
-                                    Wejdz na sluzbe
+                                    Duty On
                                 </div>
                             </div>
                         </li>

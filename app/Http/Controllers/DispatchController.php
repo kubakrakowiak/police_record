@@ -6,6 +6,8 @@ use App\Models\Dispatch;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
+use function Composer\Autoload\includeFile;
 use function PHPUnit\Framework\isEmpty;
 
 class DispatchController extends Controller
@@ -33,7 +35,8 @@ class DispatchController extends Controller
             ]);
             return response()->json('Done', 201);
         }
-        elseif ($dispatch['user_id'] != Auth::user()['id'] && !$dispatch['ended_at']) {
+        elseif ($dispatch['user_id'] != Auth::user()['id'] && !$dispatch['ended_at']){
+            Gate::authorize('create', $dispatch);
             $dispatch->update([
                 'ended_at' => Carbon::now()
             ]);
@@ -56,63 +59,8 @@ class DispatchController extends Controller
     {
         $dispatch = Dispatch::orderBy('id', 'desc')->first();
         if (!$dispatch['ended_at']){
-            return response()->json($dispatch->user);
+            return response()->json($dispatch->user->load(['grade']));
         }
         else return response()->json(false);
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

@@ -62797,7 +62797,7 @@ var render = function () {
                                 },
                                 [
                                   _vm._v(
-                                    "\n                                Wyjdz z sluzby\n                            "
+                                    "\n                                Duty Off\n                            "
                                   ),
                                 ]
                               )
@@ -62809,7 +62809,7 @@ var render = function () {
                                 },
                                 [
                                   _vm._v(
-                                    "\n                                Wejdz na sluzbe\n                            "
+                                    "\n                                Duty On\n                            "
                                   ),
                                 ]
                               ),
